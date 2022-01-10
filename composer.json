@@ -1,5 +1,5 @@
 {
-    "name": "realvirtual/Paycash",
+    "name": "realvirtual/paycash",
     "description": "Paycash pago en tiendas de conveniencia",
     "type": "magento2-module",    
     "minimum-stability": "stable",

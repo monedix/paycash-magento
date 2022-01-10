@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Paycash:etc/config.xsd">    
+    <default>
+        <csp>
+            <mode>
+                <storefront>
+                    <report_only>0</report_only>
+                </storefront>
+                <admin>
+                    <report_only>0</report_only>
+                </admin>
+            </mode>
+        </csp>        
+        <payment>
+            <Paycash>
+                <active>0</active>
+                <is_sandbox>1</is_sandbox>
+                <country>MX</country> 
+                <model>Paycash\Stores\Model\Payment</model>
+                <order_status>pending_payment</order_status>
+                <payment_action>order</payment_action>                
+                <title>Paycash (pago en efectivo)</title>
+                <sandbox_sk backend_model="Magento\Config\Model\Config\Backend\Encrypted" />                
+                <live_sk backend_model="Magento\Config\Model\Config\Backend\Encrypted" />                     
+                <deadline_hours>72</deadline_hours>
+                <show_map>0</show_map>
+                <iva>0</iva>
+                <allowspecific>1</allowspecific>      
+                <specificcountry>MX</specificcountry>                                               
+            </Paycash>
+        </payment>
+    </default>
+</config>

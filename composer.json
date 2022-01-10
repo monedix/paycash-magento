@@ -1,0 +1,22 @@
+{
+    "name": "realvirtual/Paycash",
+    "description": "Paycash pago en tiendas de conveniencia",
+    "type": "magento2-module",    
+    "minimum-stability": "stable",
+    "license": "Apache-2.0",
+    "require": {
+        "openpay/sdk": "2.2.*"
+    },
+    "authors": [
+        {
+            "name": "Realvirtual",
+            "homepage": "http://www.realvirtual.com.mx",
+            "email": "mmunuzuri@realvirtuao.com.mx"
+        }
+    ],
+    "extra": {
+        "map": [
+            ["*", "Paycash"]
+        ]
+    }
+}

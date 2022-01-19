@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
-
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Paycash:etc/config.xsd">    
+<!--
+/**
+ * Openpay_Stores default configuration
+ *
+ * @category    Openpay
+ * @package     Openpay_Stores
+ * @author      Federico Balderas
+ * @copyright   Openpay (http://openpay.mx)
+ * @license     http://www.apache.org/licenses/LICENSE-2.0  Apache License Version 2.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">    
     <default>
         <csp>
             <mode>
@@ -13,14 +23,14 @@
             </mode>
         </csp>        
         <payment>
-            <Paycash>
+            <openpay_stores>
                 <active>0</active>
                 <is_sandbox>1</is_sandbox>
                 <country>MX</country> 
-                <model>Paycash\Stores\Model\Payment</model>
+                <model>Openpay\Stores\Model\Payment</model>
                 <order_status>pending_payment</order_status>
                 <payment_action>order</payment_action>                
-                <title>Paycash (pago en efectivo)</title>
+                <title>Openpay (pago en efectivo)</title>
                 <sandbox_sk backend_model="Magento\Config\Model\Config\Backend\Encrypted" />                
                 <live_sk backend_model="Magento\Config\Model\Config\Backend\Encrypted" />                     
                 <deadline_hours>72</deadline_hours>
@@ -28,7 +38,7 @@
                 <iva>0</iva>
                 <allowspecific>1</allowspecific>      
                 <specificcountry>MX</specificcountry>                                               
-            </Paycash>
+            </openpay_stores>
         </payment>
     </default>
 </config>

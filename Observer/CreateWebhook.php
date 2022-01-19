@@ -1,19 +1,18 @@
 <?php
 /** 
  * @category    Payments
- * @package     Paycash
- * @author      Realvirtual
- * @copyright   Realvirtual (http://realvirtual.com.mx)
+ * @package     Openpay_Stores
+ * @author      Federico Balderas
+ * @copyright   Openpay (http://openpay.mx)
  * @license     http://www.apache.org/licenses/LICENSE-2.0  Apache License Version 2.0
  */
 
-
-namespace Paycash\Stores\Observer;
+namespace Openpay\Stores\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Message\ManagerInterface;
-use Paycash\Stores\Model\Payment as Config;
+use Openpay\Stores\Model\Payment as Config;
 
 /**
  * Class CreateWebhook

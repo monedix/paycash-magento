@@ -17,7 +17,7 @@ define(
         rendererList.push(
             {
                 type: 'openpay_stores',
-                component: 'Paycash/js/view/payment/method-renderer/openpay-method'
+                component: 'Openpay_Stores/js/view/payment/method-renderer/openpay-method'
             }
         );
         /** Add view logic here if needed */

@@ -5,13 +5,13 @@
  * See COPYING.txt for license details.
  */
 
-namespace Paycash\Stores\Model;
+namespace Openpay\Stores\Model;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Session as CustomerSession;
 
-use Paycash\Data\Client as Openpay;
+use Openpay\Data\Client as Openpay;
 
 /**
  * Class Payment
@@ -74,7 +74,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * @param \Magento\Payment\Helper\Data $paymentData
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Payment\Model\Method\Logger $logger
-     * @param \Paycash\Stores\Mail\Template\TransportBuilder $transportBuilder
+     * @param \Openpay\Stores\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Psr\Log\LoggerInterface $logger_interface
@@ -82,7 +82,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * @param \Magento\Framework\Filesystem\Io\File $file
      * @param Customer $customerModel
      * @param CustomerSession $customerSession
-     * @param \Paycash\Cards\Model\OpenpayCustomerFactory $openpayCustomerFactory
+     * @param \Openpay\Cards\Model\OpenpayCustomerFactory $openpayCustomerFactory
      * @param array $data
      */
     public function __construct(
@@ -93,7 +93,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             \Magento\Payment\Helper\Data $paymentData, 
             \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig, 
             \Magento\Payment\Model\Method\Logger $logger,             
-            \Paycash\Stores\Mail\Template\TransportBuilder $transportBuilder,
+            \Openpay\Stores\Mail\Template\TransportBuilder $transportBuilder,
             \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
             \Magento\Store\Model\StoreManagerInterface $storeManager,
             \Psr\Log\LoggerInterface $logger_interface,
@@ -101,7 +101,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             \Magento\Framework\Filesystem\Io\File $file,
             Customer $customerModel,
             CustomerSession $customerSession,            
-            \Paycash\Cards\Model\OpenpayCustomerFactory $openpayCustomerFactory,
+            \Openpay\Cards\Model\OpenpayCustomerFactory $openpayCustomerFactory,
             array $data = []            
     ) {
         parent::__construct(
@@ -153,7 +153,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * 
      * @param \Magento\Payment\Model\InfoInterface $payment
      * @param float $amount
-     * @return \Stores\Model\Payment
+     * @return \Openpay\Stores\Model\Payment
      * @throws \Magento\Framework\Validator\Exception
      */
     public function order(\Magento\Payment\Model\InfoInterface $payment, $amount) {

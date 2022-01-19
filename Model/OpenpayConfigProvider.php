@@ -3,11 +3,11 @@
  * Copyright © 2015 Pay.nl All rights reserved.
  */
 
-namespace Paycash\Stores\Model;
+namespace Openpay\Stores\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Payment\Helper\Data as PaymentHelper;
-use Paycash\Stores\Model\Payment as OpenpayPayment;
+use Openpay\Stores\Model\Payment as OpenpayPayment;
 use Magento\Checkout\Model\Cart;
 
 class OpenpayConfigProvider implements ConfigProviderInterface
@@ -25,7 +25,7 @@ class OpenpayConfigProvider implements ConfigProviderInterface
     protected $methods = [];
     
     /**
-     * @var \Paycash\Stores\Model\Payment
+     * @var \Openpay\Stores\Model\Payment
      */
     protected $payment ;
 

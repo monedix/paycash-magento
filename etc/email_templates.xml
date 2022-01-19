@@ -6,5 +6,5 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
-    <template id="openpay_pdf_template" label="Payment Receipt" file="openpay_pdf.html" type="html" module="Paycash" area="frontend"/>    
+    <template id="openpay_pdf_template" label="Payment Receipt" file="openpay_pdf.html" type="html" module="Openpay_Stores" area="frontend"/>    
 </config>

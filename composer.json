@@ -1,6 +1,6 @@
 {
-    "name": "realvirtual/paycash",
-    "description": "Paycash pago en tiendas de conveniencia",
+    "name": "openpay/magento2-stores",
+    "description": "Openpay integration for Magento 2 (Cash payment)",
     "type": "magento2-module",    
     "minimum-stability": "stable",
     "license": "Apache-2.0",
@@ -9,14 +9,19 @@
     },
     "authors": [
         {
-            "name": "Realvirtual",
-            "homepage": "http://www.realvirtual.com.mx",
-            "email": "mmunuzuri@realvirtuao.com.mx"
+            "name": "Openpay",
+            "homepage": "http://www.openpay.mx/docs/libraries.html",
+            "email": "soporte@openpay.mx"
+        },
+        {
+            "name": "Jose Romero",
+            "homepage": "https://openpay.mx",
+            "email": "plugins@openpay.mx"
         }
     ],
     "extra": {
         "map": [
-            ["*", "Paycash"]
+            ["*", "Openpay/Stores"]
         ]
     }
 }

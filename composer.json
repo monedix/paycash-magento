@@ -1,5 +1,5 @@
 {
-    "name": "paycash",
+    "name": "paycash/magento",
     "description": "paycash",
     "type": "magento2-module",    
     "minimum-stability": "stable",

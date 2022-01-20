@@ -1,11 +1,11 @@
 <?php
  
 
-namespace Openpay\Stores\Controller\Index;
+namespace  Paycash\Pay\Controller\Index;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Openpay\Stores\Model\Payment as OpenpayPayment;
+use  Paycash\Pay\Model\Payment as OpenpayPayment;
 
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;

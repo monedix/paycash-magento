@@ -7,15 +7,6 @@ Módulo para pagos en efectivo con Openpay para Magento2 (soporte hasta v2.3.0)
 
 1. Ir a la carpeta raíz del proyecto de Magento y seguir los siguiente pasos:
 
-**Para versiones de Magento < 2.3.0**
-```bash    
-composer require openpay/magento2-stores:~3.1.0
-```
-
-**Para versiones de Magento >= 2.3.0**
-```bash    
-composer require openpay/magento2-stores:~3.5.0
-```
 
 **Para versiones de Magento >= 2.3.5**
 ```bash

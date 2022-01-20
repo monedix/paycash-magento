@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-namespace Openpay\Stores\Mail\Template;
+namespace  Paycash\Pay\Mail\Template;
 
 
 use Magento\Framework\App\TemplateTypesInterface;

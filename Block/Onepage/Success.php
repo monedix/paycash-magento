@@ -1,7 +1,7 @@
 <?php
  
 
-namespace Openpay\Stores\Block\Onepage;
+namespace  Paycash\Pay\Block\Onepage;
 
 use Magento\Framework\View\Element\Template;
 

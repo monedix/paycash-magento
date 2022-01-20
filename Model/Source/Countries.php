@@ -1,6 +1,6 @@
 <?php
 
-namespace Openpay\Stores\Model\Source;
+namespace  Paycash\Pay\Model\Source;
 
 class Countries
 {

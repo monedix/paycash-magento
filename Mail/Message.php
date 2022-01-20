@@ -11,7 +11,7 @@
  * @copyright Copyright (c) 2016-2018 Extait, Inc. (http://www.extait.com)
  */
 
-namespace Openpay\Stores\Mail;
+namespace  Paycash\Pay\Mail;
 
 use Zend\Mime\Mime;
 use Zend\Mime\PartFactory;

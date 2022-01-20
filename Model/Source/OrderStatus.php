@@ -1,7 +1,7 @@
 <?php
  
 
-namespace Openpay\Stores\Model\Source;
+namespace  Paycash\Pay\Model\Source;
 
 use \Magento\Sales\Model\Order;
 

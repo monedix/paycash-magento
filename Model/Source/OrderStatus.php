@@ -1,11 +1,5 @@
 <?php
-/** 
- * @category    Payments
- * @package     Openpay_Stores
- * @author      Federico Balderas
- * @copyright   Openpay (http://openpay.mx)
- * @license     http://www.apache.org/licenses/LICENSE-2.0  Apache License Version 2.0
- */
+ 
 
 namespace Openpay\Stores\Model\Source;
 

@@ -2,7 +2,7 @@
     "name": "paycash/magento",
     "description": "Paycash integration for Magento 2 (Cash payment)",
     "type": "magento2-module",    
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "license": "Apache-2.0",
     "require": {
         "openpay/sdk": "2.2.*"

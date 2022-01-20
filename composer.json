@@ -1,31 +1,23 @@
 {
     "name": "paycash/magento",
-    "description": "paycash",
+    "description": "Paycash integration for Magento 2 (Cash payment)",
     "type": "magento2-module",    
-    "minimum-stability": "dev", 
-    "prefer-stable": true ,
+    "minimum-stability": "stable",
     "license": "Apache-2.0",
     "require": {
-        "magento/framework"      : ">=100.0.0 <102",
-        "magento/module-catalog" : ">=100.0.0 <103",
-        "magento/module-search"  : ">=100.0.0 <101"
+        "openpay/sdk": "2.2.*"
     },
-        "repositories": [
-            {"type": "composer", "url": "https://repo.packagist.com/realvirtual/"},
-            {"packagist.org": false}
-        ],
     "authors": [
         {
-            "name": "Openpay",
-            "homepage": "http://www.openpay.mx/docs/libraries.html",
-            "email": "soporte@openpay.mx"
+            "name": "paycash",
+            "homepage": "http://realvirtual.com.mx",
+            "email": "mmunuzuri@realvirtual.com.mx"
         }
-     
+        
     ],
-    
     "extra": {
         "map": [
-            ["*", "Openpay/Stores"]
+            ["*", "Paycash/Pay"]
         ]
     }
 }

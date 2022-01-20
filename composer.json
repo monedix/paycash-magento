@@ -2,11 +2,16 @@
     "name": "paycash/magento",
     "description": "paycash",
     "type": "magento2-module",    
-    "minimum-stability": "stable",
+    "minimum-stability": "dev", 
+    "prefer-stable": true ,
     "license": "Apache-2.0",
     "require": {
         "openpay/sdk": "2.2.*"
     },
+        "repositories": [
+            {"type": "composer", "url": "https://repo.packagist.com/realvirtual/"},
+            {"packagist.org": false}
+        ],
     "authors": [
         {
             "name": "Openpay",
@@ -15,6 +20,7 @@
         }
      
     ],
+    
     "extra": {
         "map": [
             ["*", "Openpay/Stores"]

@@ -34,13 +34,13 @@
                     <label>Title</label>
                 </field>
                 <field id="sandbox_merchant_id" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Sandbox Merchant ID</label>    
+                    <label>PayCash API Test Key</label>    
                     <depends>
                         <field id="is_sandbox">1</field>
                     </depends>                               
                 </field>
                 <field id="sandbox_sk" translate="label" type="obscure" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Sandbox Llave Secreta</label>
+                    <label>PayCash API Production Key</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <depends>
                         <field id="is_sandbox">1</field>
@@ -60,9 +60,9 @@
                     </depends>                         
                 </field>  
                 <field id="deadline_hours" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Fecha límite de pago</label>                    
+                    <label>Vigencia (en días)</label>                    
                     <validate>required-entry</validate>                      
-                    <comment>Define cuantas horas máximo tendrá el cliente para pagar una vez que se genera el recibo de pago.</comment> 
+                    <comment>Define cuantos dias máximo tendrá el cliente para pagar una vez que se genera el recibo de pago.</comment> 
                 </field>            
                 <field id="show_map" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Mostrar mapa</label>

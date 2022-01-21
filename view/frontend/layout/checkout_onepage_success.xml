@@ -1,15 +1,5 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Openpay_Stores layout Onepage
- *
- * @category    Openpay
- * @package     Openpay_Stores
- * @author      Federico Balderas
- * @copyright   Openpay (http://openpay.mx)
- * @license     http://www.apache.org/licenses/LICENSE-2.0  Apache License Version 2.0
-*/
--->
+
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">    
     <body>               
         <referenceBlock name="page.main.title">
@@ -19,7 +9,7 @@
             </action>
         </referenceBlock>
         <referenceContainer name="content">
-            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success" template="Openpay_Stores::success.phtml" cacheable="false"/>
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success" template="Paycash_Pay::success.phtml" cacheable="false"/>
             <block class="Magento\Checkout\Block\Registration" name="checkout.registration" template="registration.phtml" cacheable="false"/>
         </referenceContainer>
         <container name="order.success.additional.info" label="Order Success Additional Info"/>

@@ -10,11 +10,11 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Openpay_Stores/payment/openpay-offline'
+                template: 'Paycash_Pay/payment/openpay-offline'
             },
             country: function() {
-                console.log('getCountry()', window.checkoutConfig.openpay_stores.country);
-                return window.checkoutConfig.openpay_stores.country;
+                console.log('getCountry()', window.checkoutConfig.paycash_pay.country);
+                return window.checkoutConfig.paycash_pay.country;
             }
         });
     }

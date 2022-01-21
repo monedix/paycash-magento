@@ -1,6 +1,6 @@
-# Openpay-Magento2-Stores
+# Paycash-Pay
 
-Módulo para pagos en efectivo con Openpay para Magento2 (soporte hasta v2.3.0)
+Módulo para pagos en efectivo con Paycash para Magento2 (soporte hasta v2.3.0)
 
 
 ## Instalación
@@ -10,13 +10,13 @@ Módulo para pagos en efectivo con Openpay para Magento2 (soporte hasta v2.3.0)
 
 **Para versiones de Magento >= 2.3.5**
 ```bash
-composer require openpay/magento2-stores:4.1.*
+composer require paycash/magento:dev-master
 ```
 
 2. Después se procede a habilitar el módulo,actualizar y limpiar cache de la plataforma.
 
 ```bash    
-php bin/magento module:enable Openpay_Stores --clear-static-content
+php bin/magento module:enable Paycash_Pay --clear-static-content
 php bin/magento setup:upgrade
 php bin/magento cache:clean
 ```

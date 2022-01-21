@@ -16,7 +16,7 @@ class OpenpayConfigProvider implements ConfigProviderInterface
      * @var string[]
      */
     protected $methodCodes = [
-        'openpay_stores',        
+        'paycash_pay',        
     ];
 
     /**
@@ -52,7 +52,7 @@ class OpenpayConfigProvider implements ConfigProviderInterface
         $config = [];
         foreach ($this->methodCodes as $code) {
             if ($this->methods[$code]->isAvailable()) {
-                $config['openpay_stores']['country'] = $this->payment->getCountry();
+                $config['paycash_pay']['country'] = $this->payment->getCountry();
             }
         }
                 

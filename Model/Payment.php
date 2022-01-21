@@ -11,7 +11,7 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Session as CustomerSession;
 
-use Openpay\Data\Client as Openpay;
+use Openpay\Data\Client as Paycash;
 
 /**
  * Class Payment
@@ -21,7 +21,7 @@ use Openpay\Data\Client as Openpay;
 class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 {
 
-    const CODE = 'openpay_stores';
+    const CODE = 'paycash_pay';
 
     protected $_code = self::CODE;
     protected $_isGateway = true;
@@ -201,7 +201,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 $charge_request['iva'] = $this->iva;
             }
             
-            // Realiza la transacción en Openpay
+            // Realiza la transacción en Paycash
             $charge = $this->makeOpenpayCharge($customer_data, $charge_request);                                                            
                         
             $payment->setTransactionId($charge->id);
@@ -213,9 +213,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $state = \Magento\Sales\Model\Order::STATE_NEW;
             $order->setState($state)->setStatus($state);
             
-            // Registra el ID de la transacción de Openpay
+            // Registra el ID de la transacción de Paycash
             $order->setExtOrderId($charge->id);            
-            // Registra (si existe), el ID de Customer de Openpay
+            // Registra (si existe), el ID de Customer de Paycash
             $order->setExtCustomerId($openpay_customer_id);
             $order->save();  
             
@@ -244,7 +244,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             return $openpay->charges->create($charge_request);
         }
 
-        // Se remueve el atributo de "customer" porque ya esta relacionado con una cuenta en Openpay
+        // Se remueve el atributo de "customer" porque ya esta relacionado con una cuenta en Paycash
         unset($charge_request['customer']); 
 
         $openpay_customer = $this->retrieveOpenpayCustomerAccount($customer_data);        

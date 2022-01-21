@@ -1,5 +1,7 @@
 #Paycash-Pay
 
+![Paycash Pay](https://realvirtual.com.mx/wp-content/uploads/2022/01/paycash_pay.png)
+
 Módulo para pagos en efectivo conPaycash para Magento2 (soporte hasta v2.3.0)
 
 

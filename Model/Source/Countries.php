@@ -12,6 +12,7 @@ class Countries
         return array(
             array('value' => 'MX', 'label' => 'México'),
             array('value' => 'CO', 'label' => 'Colombia'),
+            array('value' => 'EC', 'label' => 'Ecuador'),
             array('value' => 'PE', 'label' => 'Perú')
         );     
     }

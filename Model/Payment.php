@@ -344,7 +344,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     }
     
     public function sendEmail($pdf_file, $order) {
-        $templateId = 'openpay_pdf_template';
+        $templateId = 'paycash_pdf_template';
         $email = $this->scope_config->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
         $name  = $this->scope_config->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
         $pdf = file_get_contents($pdf_file);

@@ -2,17 +2,17 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <virtualType name=" Paycash\Pay\Model\ConfigProvider" type="Magento\Payment\Model\CcGenericConfigProvider">
+    <virtualType name="Paycash\Pay\Model\ConfigProvider" type="Magento\Payment\Model\CcGenericConfigProvider">
         <arguments>
             <argument name="methodCodes" xsi:type="array">
-                <item name="paycash_pay" xsi:type="const"> Paycash\Pay\Model\Payment::CODE</item>
+                <item name="paycash_pay" xsi:type="const">Paycash\Pay\Model\Payment::CODE</item>
             </argument>
         </arguments>
     </virtualType>    
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="openpay_stores_config_provider" xsi:type="object"> Paycash\Pay\Model\OpenpayConfigProvider</item>
+                <item name="openpay_stores_config_provider" xsi:type="object">Paycash\Pay\Model\OpenpayConfigProvider</item>
             </argument>
         </arguments>
     </type>        

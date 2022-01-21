@@ -1,6 +1,6 @@
-# Paycash-Pay
+#Paycash-Pay
 
-Módulo para pagos en efectivo con Paycash para Magento2 (soporte hasta v2.3.0)
+Módulo para pagos en efectivo conPaycash para Magento2 (soporte hasta v2.3.0)
 
 
 ## Instalación
@@ -10,7 +10,7 @@ Módulo para pagos en efectivo con Paycash para Magento2 (soporte hasta v2.3.0)
 
 **Para versiones de Magento >= 2.3.5**
 ```bash
-composer require paycash/magento:dev-master
+composer requirePaycash/magento:dev-master
 ```
 
 2. Después se procede a habilitar el módulo,actualizar y limpiar cache de la plataforma.

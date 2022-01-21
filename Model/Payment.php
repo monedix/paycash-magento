@@ -5,13 +5,13 @@
  * See COPYING.txt for license details.
  */
 
-namespace  Paycash\Pay\Model;
+namespace Paycash\Pay\Model;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Session as CustomerSession;
 
-use Openpay\Data\Client as Paycash;
+use Openpay\Data\Client asPaycash;
 
 /**
  * Class Payment
@@ -74,7 +74,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * @param \Magento\Payment\Helper\Data $paymentData
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Payment\Model\Method\Logger $logger
-     * @param \ Paycash\Pay\Mail\Template\TransportBuilder $transportBuilder
+     * @param \Paycash\Pay\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Psr\Log\LoggerInterface $logger_interface
@@ -82,7 +82,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * @param \Magento\Framework\Filesystem\Io\File $file
      * @param Customer $customerModel
      * @param CustomerSession $customerSession
-     * @param \ Paycash\Pay\Model\OpenpayCustomerFactory $openpayCustomerFactory
+     * @param \Paycash\Pay\Model\OpenpayCustomerFactory $openpayCustomerFactory
      * @param array $data
      */
     public function __construct(
@@ -93,7 +93,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             \Magento\Payment\Helper\Data $paymentData, 
             \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig, 
             \Magento\Payment\Model\Method\Logger $logger,             
-            \ Paycash\Pay\Mail\Template\TransportBuilder $transportBuilder,
+            \Paycash\Pay\Mail\Template\TransportBuilder $transportBuilder,
             \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
             \Magento\Store\Model\StoreManagerInterface $storeManager,
             \Psr\Log\LoggerInterface $logger_interface,
@@ -101,7 +101,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             \Magento\Framework\Filesystem\Io\File $file,
             Customer $customerModel,
             CustomerSession $customerSession,            
-            \ Paycash\Pay\Model\OpenpayCustomerFactory $openpayCustomerFactory,
+            \Paycash\Pay\Model\OpenpayCustomerFactory $openpayCustomerFactory,
             array $data = []            
     ) {
         parent::__construct(
@@ -153,7 +153,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * 
      * @param \Magento\Payment\Model\InfoInterface $payment
      * @param float $amount
-     * @return \ Paycash\Pay\Model\Payment
+     * @return \Paycash\Pay\Model\Payment
      * @throws \Magento\Framework\Validator\Exception
      */
     public function order(\Magento\Payment\Model\InfoInterface $payment, $amount) {
@@ -201,7 +201,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 $charge_request['iva'] = $this->iva;
             }
             
-            // Realiza la transacción en Paycash
+            // Realiza la transacción enPaycash
             $charge = $this->makeOpenpayCharge($customer_data, $charge_request);                                                            
                         
             $payment->setTransactionId($charge->id);
@@ -213,9 +213,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $state = \Magento\Sales\Model\Order::STATE_NEW;
             $order->setState($state)->setStatus($state);
             
-            // Registra el ID de la transacción de Paycash
+            // Registra el ID de la transacción dePaycash
             $order->setExtOrderId($charge->id);            
-            // Registra (si existe), el ID de Customer de Paycash
+            // Registra (si existe), el ID de Customer dePaycash
             $order->setExtCustomerId($openpay_customer_id);
             $order->save();  
             
@@ -244,7 +244,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             return $openpay->charges->create($charge_request);
         }
 
-        // Se remueve el atributo de "customer" porque ya esta relacionado con una cuenta en Paycash
+        // Se remueve el atributo de "customer" porque ya esta relacionado con una cuenta enPaycash
         unset($charge_request['customer']); 
 
         $openpay_customer = $this->retrieveOpenpayCustomerAccount($customer_data);        

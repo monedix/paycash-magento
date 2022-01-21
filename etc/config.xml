@@ -19,7 +19,7 @@
                 <active>0</active>
                 <is_sandbox>1</is_sandbox>
                 <country>MX</country> 
-                <model> Paycash\Pay\Model\Payment</model>
+                <model>Paycash\Pay\Model\Payment</model>
                 <order_status>pending_payment</order_status>
                 <payment_action>order</payment_action>                
                 <title>Paycash (pago en efectivo)</title>

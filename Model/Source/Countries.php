@@ -1,6 +1,6 @@
 <?php
 
-namespace  Paycash\Pay\Model\Source;
+namespace Paycash\Pay\Model\Source;
 
 class Countries
 {

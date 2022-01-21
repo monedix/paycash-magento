@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-namespace  Paycash\Pay\Mail\Template;
+namespace Paycash\Pay\Mail\Template;
 
 
 use Magento\Framework\App\TemplateTypesInterface;
@@ -40,7 +40,7 @@ class TransportBuilder extends \Magento\Framework\Mail\Template\TransportBuilder
     private $mimeMessageInterfaceFactory;
     private $mimePartInterfaceFactory;
     private $addressConverter;
-    protected $attachments = [];
+    protected $attachments = []; 
     protected $partFactory;
 
     public function __construct(

@@ -1,12 +1,12 @@
 <?php
  
 
-namespace  Paycash\Pay\Observer;
+namespace Paycash\Pay\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Message\ManagerInterface;
-use  Paycash\Pay\Model\Payment as Config;
+use Paycash\Pay\Model\Payment as Config;
 
 /**
  * Class CreateWebhook

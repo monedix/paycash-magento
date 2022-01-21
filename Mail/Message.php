@@ -11,7 +11,7 @@
  * @copyright Copyright (c) 2016-2018 Extait, Inc. (http://www.extait.com)
  */
 
-namespace  Paycash\Pay\Mail;
+namespace Paycash\Pay\Mail;
 
 use Zend\Mime\Mime;
 use Zend\Mime\PartFactory;
@@ -53,7 +53,7 @@ class Message implements \Magento\Framework\Mail\MailMessageInterface {
         $this->zendMessage = MailMessageFactory::getInstance();
         $this->zendMessage->setEncoding($charset);
     }
-
+ 
     /**
      * Add the HTML mime part to the message.
      *

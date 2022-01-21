@@ -1,6 +1,6 @@
 <?php
 
-namespace  Paycash\Pay\Model;
+namespace Paycash\Pay\Model;
 
 class OpenpayCustomer extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface {
 
@@ -10,7 +10,7 @@ class OpenpayCustomer extends \Magento\Framework\Model\AbstractModel implements 
     protected $_eventPrefix = 'openpay_customers';
         
     protected function _construct() {
-        $this->_init(' Paycash\Pay\Model\ResourceModel\OpenpayCustomer');        
+        $this->_init('Paycash\Pay\Model\ResourceModel\OpenpayCustomer');        
     }
 
     public function getIdentities() {

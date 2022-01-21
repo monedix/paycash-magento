@@ -1,7 +1,7 @@
 <?php
  
 
-namespace  Paycash\Pay\Model\Source;
+namespace Paycash\Pay\Model\Source;
 
 use \Magento\Payment\Model\Method\AbstractMethod;
 

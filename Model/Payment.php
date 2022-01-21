@@ -11,7 +11,7 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Session as CustomerSession;
 
-use Openpay\Data\Client asPaycash;
+use Openpay\Data\Client as Paycash;
 
 /**
  * Class Payment

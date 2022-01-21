@@ -6,7 +6,7 @@
             <group id="paycash_pay" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Paycash </label>
                 <comment>
-                    <![CDATA[<a href="https://www.paycashglobal.com/" target="_blank">Crea tu cuenta en Paycash Global /a>]]>
+                    <![CDATA[<a href="https://www.paycashglobal.com/" target="_blank">Crea tu cuenta en Paycash Global </a>]]>
                 </comment>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Habilitar Modulo</label>

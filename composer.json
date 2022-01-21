@@ -1,6 +1,6 @@
 {
     "name": "paycash/magento",
-    "description": "Paycash integration for Magento 2 (Cash payment)",
+    "description": "Paycash integration for Magento 2 ",
     "type": "magento2-module",    
     "minimum-stability": "dev",
     "license": "Apache-2.0",

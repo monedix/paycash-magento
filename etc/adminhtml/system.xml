@@ -50,9 +50,9 @@
                     </depends>                         
                 </field>  
                 <field id="deadline_hours" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Vigencia (en días)</label>                    
+                    <label>Vigencia (en horas)</label>                    
                     <validate>required-entry</validate>                      
-                    <comment>Define cuantos dias máximo tendrá el cliente para pagar una vez que se genera el recibo de pago.</comment> 
+                    <comment>Define cuanl sera el máximo en horas que tendrá el cliente para pagar una vez que se genera el recibo de pago.</comment> 
                 </field>            
                 <field id="show_map" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Mostrar mapa</label>

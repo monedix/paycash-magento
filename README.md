@@ -4,11 +4,9 @@
 
 Módulo para pagos en efectivo conPaycash para Magento2 (soporte hasta v2.3.0)
 
-
 ## Instalación
 
 1. Ir a la carpeta raíz del proyecto de Magento y seguir los siguiente pasos:
-
 
 **Para versiones de Magento >= 2.3.5**
 ```bash

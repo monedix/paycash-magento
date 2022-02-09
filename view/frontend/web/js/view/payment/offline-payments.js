@@ -15,6 +15,7 @@ define(
     ) {
         'use strict';
         rendererList.push(
+
             {
                 type: 'paycash_pay',
                 component: 'Paycash_Pay/js/view/payment/method-renderer/openpay-method'

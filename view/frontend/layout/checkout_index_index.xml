@@ -20,7 +20,7 @@
                                                                 <item name="offline-store-payments" xsi:type="array">
                                                                     <item name="component" xsi:type="string">Paycash_Pay/js/view/payment/offline-payments</item>
                                                                     <item name="methods" xsi:type="array">
-                                                                        <item name="paycash_pay" xsi:type="array">
+                                                                        <item name="Paycash_pay" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>                                                                        
                                                                     </item>

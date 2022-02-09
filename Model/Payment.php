@@ -55,11 +55,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     ) {
         parent::__construct(
             $context, $registry, $extensionFactory, $customAttributeFactory,
-            $paymentData, $scopeConfig, $logger, /*$moduleList, $localeDate, null,
-            null, $data  */
-            null,
-            null,            
-            $data     
+            $paymentData, $scopeConfig, $logger, null, null, $data     
         );
         
         $this->_countryFactory = $countryFactory; //REVISAR

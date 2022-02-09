@@ -33,25 +33,22 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $pc_descripcion = '';
     protected $pc_instrucciones = '';
     
-    public function __construct(\Magento\Framework\Model\Context $context,
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Api\ExtensionAttributesFactory $extensionFactory,
         \Magento\Framework\Api\AttributeValueFactory $customAttributeFactory,
         \Magento\Payment\Helper\Data $paymentData,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Payment\Model\Method\Logger $logger,
-        /*\Magento\Framework\Module\ModuleListInterface $moduleList,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $localeDate,
-        \Magento\Directory\Model\CountryFactory $countryFactory,
-        array $data = array()*/
-            \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
-            \Magento\Store\Model\StoreManagerInterface $storeManager,
-            \Psr\Log\LoggerInterface $logger_interface,
-            \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
-            \Magento\Framework\Filesystem\Io\File $file,
-            Customer $customerModel,
-            CustomerSession $customerSession,            
-            array $data = []            
+        \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Psr\Log\LoggerInterface $logger_interface,
+        \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
+        \Magento\Framework\Filesystem\Io\File $file,
+        Customer $customerModel,
+        CustomerSession $customerSession,            
+        array $data = []
     ) {
         parent::__construct(
             $context, $registry, $extensionFactory, $customAttributeFactory,

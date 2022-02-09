@@ -62,7 +62,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $paymentData, $scopeConfig, $logger, null, null, $data     
         );
         
-        $this->_countryFactory = $countryFactory; //REVISAR
+        //$this->_countryFactory = $countryFactory; //REVISAR
         
         $this->pc_activo = $this->getConfigData('pc_activo');
         $this->pc_pruebas = $this->getConfigData('pc_pruebas');
@@ -78,8 +78,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->customerModel = $customerModel;
         $this->customerSession = $customerSession;
 
-        $url_base = $this->getUrlBaseOpenpay(); //REVISAR
-        $this->pdf_url_base = $url_base . "/paynet-pdf"; //REVISAR
+        //$url_base = $this->getUrlBaseOpenpay(); //REVISAR
+        //$this->pdf_url_base = $url_base . "/paynet-pdf"; //REVISAR
     }
     /**
      * Authorize payment abstract method

@@ -7,6 +7,10 @@
 
 namespace Paycash\Pay\Model;
 
+use Magento\Store\Model\ScopeInterface;
+use Magento\Customer\Model\Customer;
+use Magento\Customer\Model\Session as CustomerSession;
+
 /*use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -32,6 +36,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $pc_diasvigencia = '';
     protected $pc_descripcion = '';
     protected $pc_instrucciones = '';
+
+    protected $customerModel;
+    protected $customerSession;
     
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -67,6 +74,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->pc_descripcion = $this->getConfigData('pc_descripcion');
         $this->pc_instrucciones = $this->getConfigData('pc_instrucciones');
 
+
+        $this->customerModel = $customerModel;
+        $this->customerSession = $customerSession;
 
         $url_base = $this->getUrlBaseOpenpay(); //REVISAR
         $this->pdf_url_base = $url_base . "/paynet-pdf"; //REVISAR

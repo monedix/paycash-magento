@@ -29,7 +29,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $_code = self::CODE;
     protected $pc_activo = true;
     protected $pc_pruebas = true;
-    protected $pc_mensaje = '';
+    protected $title = '';
     protected $pc_apitestkey = '';
     protected $pc_apiproductionkey = '';
     protected $pc_pais = '';
@@ -66,7 +66,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         
         $this->pc_activo = $this->getConfigData('pc_activo');
         $this->pc_pruebas = $this->getConfigData('pc_pruebas');
-        $this->pc_mensaje = $this->getConfigData('pc_mensaje');
+        $this->title = $this->getConfigData('title');
         $this->pc_apitestkey = $this->getConfigData('pc_apitestkey');
         $this->pc_apiproductionkey = $this->getConfigData('pc_apiproductionkey');
         $this->pc_pais = $this->getConfigData('pc_pais');

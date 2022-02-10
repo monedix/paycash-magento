@@ -22,11 +22,11 @@
                 <order_status>pending</order_status>
                 <pc_activo>0</pc_activo>
                 <pc_pruebas>1</pc_pruebas>
-                <pc_mensaje>Paga en efectivo con PayCash</pc_mensaje> 
+                <title>Paga en efectivo con PayCash</title> 
                 <pc_apitestkey></pc_apitestkey>
                 <pc_apiproductionkey></pc_apiproductionkey>
                 <pc_pais>MX</pc_pais>                
-                <pc_diasvigencia>4</pc_diasvigencia>
+                <pc_diasvigencia>3</pc_diasvigencia>
                 <pc_descripcion>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</pc_descripcion>
                 <pc_instrucciones>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</pc_instrucciones>                                             
             </paycash_pay>

@@ -20,7 +20,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Activa el modo de pruebas al estar seleccionado.</comment> 
                 </field> 
-                <field id="pc_mensaje" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="title" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Mensaje</label>                    
                     <validate>required-entry</validate>                      
                     <comment>Título mostrado en la página de pago.</comment> 

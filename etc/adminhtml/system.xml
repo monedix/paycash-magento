@@ -46,7 +46,7 @@
                     <validate>required-entry</validate>                      
                     <comment>Dejar vacío para no especificar vigencia.</comment> 
                 </field>     
-                <field id="pc_descripcion" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="description" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Descripción</label>                    
                     <validate>required-entry</validate>                      
                     <comment>Descripción mostrada en la página de pago.</comment> 

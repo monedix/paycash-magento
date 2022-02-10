@@ -34,7 +34,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $pc_apiproductionkey = '';
     protected $pc_pais = '';
     protected $pc_diasvigencia = '';
-    protected $pc_descripcion = '';
+    protected $description = '';
     protected $pc_instrucciones = '';
 
     protected $customerModel;
@@ -71,7 +71,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->pc_apiproductionkey = $this->getConfigData('pc_apiproductionkey');
         $this->pc_pais = $this->getConfigData('pc_pais');
         $this->pc_diasvigencia = $this->getConfigData('pc_diasvigencia');
-        $this->pc_descripcion = $this->getConfigData('pc_descripcion');
+        $this->description = $this->getConfigData('description');
         $this->pc_instrucciones = $this->getConfigData('pc_instrucciones');
 
 

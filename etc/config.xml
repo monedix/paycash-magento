@@ -27,7 +27,7 @@
                 <pc_apiproductionkey></pc_apiproductionkey>
                 <pc_pais>MX</pc_pais>                
                 <pc_diasvigencia>3</pc_diasvigencia>
-                <pc_descripcion>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</pc_descripcion>
+                <description>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</description>
                 <pc_instrucciones>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</pc_instrucciones>                                             
             </paycash_pay>
         </payment>

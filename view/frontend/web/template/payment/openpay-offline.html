@@ -11,14 +11,15 @@
                class="radio"
                data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
-        <img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="500" height="100">
-        <h3 style="border-bottom: 1px solid #cccccc; padding-bottom: 15px;">Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</h3>   
+          
     </div>
     <div class="payment-method-content">
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->
         <div class="payment-method-billing-address">
+            <img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="500" height="100">
+            <h3 style="border-bottom: 1px solid #cccccc; padding-bottom: 15px;">Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</h3>
             <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->

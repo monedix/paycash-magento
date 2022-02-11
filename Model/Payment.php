@@ -20,9 +20,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 {
     const CODE = 'paycash_pay';
 
-    /*protected $_formBlockType = ;
-    protected $_infoBlockType = ;
-    protected $_isOffline = true;*/
+    protected $_formBlockType = \Paycash\Pay\Block\Form\Custompayment::class;
+    protected $_infoBlockType = \Magento\Payment\Block\Info\Instructions::class;
+    protected $_isOffline = true;
 
     protected $_code = self::CODE;
     protected $pc_activo = true;

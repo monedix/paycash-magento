@@ -14,10 +14,12 @@ define(
             },
             getDescription: function()
             {
-                console.log("1 Método getDescription() = " + window.checkoutConfig.payment.description[this.item.method]);
-                console.log("2 Método getDescription() = " + window.checkoutConfig.payment.description);
+                console.log("LLAMADA AL METODO GETDESCRIPTION");
+                /*console.log("1 Método getDescription() = " + window.checkoutConfig.payment.description[this.item.method]);
+                console.log("2 Método getDescription() = " + window.checkoutConfig.payment.description);*/
                 console.log("3 Método getDescription() = " + window.checkoutConfig.paycash_pay.description);
-                return window.checkoutConfig.payment.description[this.item.method];
+                //return window.checkoutConfig.payment.description[this.item.method];
+                return window.checkoutConfig.paycash_pay.description;
             }/*,
             country: function() {
                 console.log('getCountry()', window.checkoutConfig.paycash_pay.country);

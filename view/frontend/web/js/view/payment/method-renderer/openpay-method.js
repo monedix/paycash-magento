@@ -14,8 +14,8 @@ define(
             },
             getDescription: function()
             {
-                //return window.checkoutConfig.paycash_pay.description[this.item.method];
-                return window.checkoutConfig.paycash_pay.description;
+                return window.checkoutConfig.paycash_pay.description[this.item.method];
+                //return window.checkoutConfig.paycash_pay.description;
             },
             country: function() {
                 console.log('getCountry()', window.checkoutConfig.paycash_pay.country);

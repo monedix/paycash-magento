@@ -26,6 +26,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 {
     const CODE = 'paycash_pay';
 
+    
+    /*protected $_formBlockType = ;
+    protected $_infoBlockType = ;
+    protected $_isOffline = true;*/
+
     protected $_code = self::CODE;
     protected $pc_activo = true;
     protected $pc_pruebas = true;
@@ -133,8 +138,15 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         return $this;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    public function createWebhook()
+    {
 
-
+    }
 
 
 

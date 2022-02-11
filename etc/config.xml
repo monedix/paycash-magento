@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
-<!--
- 
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">    
     <default>
-        <csp>
+        <!-- <csp>
             <mode>
                 <storefront>
                     <report_only>0</report_only>
@@ -13,22 +10,24 @@
                     <report_only>0</report_only>
                 </admin>
             </mode>
-        </csp>        
+        </csp>   -->     
         <payment>
             <paycash_pay>
+                <active>0</active>
                 <model>Paycash\Pay\Model\Payment</model>
-                <sandbox_sk backend_model="Magento\Config\Model\Config\Backend\Encrypted" />                
-                <live_sk backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
                 <order_status>pending</order_status>
+                <title>Paga en efectivo con PayCash</title> 
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+                
                 <pc_activo>0</pc_activo>
                 <pc_pruebas>1</pc_pruebas>
-                <title>Paga en efectivo con PayCash</title> 
                 <pc_apitestkey></pc_apitestkey>
                 <pc_apiproductionkey></pc_apiproductionkey>
                 <pc_pais>MX</pc_pais>                
                 <pc_diasvigencia>3</pc_diasvigencia>
                 <description>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</description>
-                <pc_instrucciones>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</pc_instrucciones>                                             
+                <instructions>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</instructions>                                             
             </paycash_pay>
         </payment>
     </default>

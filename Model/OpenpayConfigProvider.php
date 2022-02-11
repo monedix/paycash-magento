@@ -53,15 +53,9 @@ class OpenpayConfigProvider implements ConfigProviderInterface
         foreach ($this->methodCodes as $code) {
             if ($this->methods[$code]->isAvailable()) {
                 $config['paycash_pay']['country'] = $this->payment->getCountry();
-                $config['paycash_pay']['description'][$code] = $this->getDescription($code);
             }
         }
                 
         return $config;
-    }       
-    
-    protected function getDescription($code)
-    {
-        return nl2br($this->escaper->escapeHtml($this->methods[$code]->getDescription()));
-    }
+    }      
 }

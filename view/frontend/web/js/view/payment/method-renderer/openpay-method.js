@@ -14,13 +14,15 @@ define(
             },
             getDescription: function()
             {
-                return window.checkoutConfig.paycash_pay.description[this.item.method];
-                //return window.checkoutConfig.paycash_pay.description;
-            },
+                console.log("1 Método getDescription() = " + window.checkoutConfig.payment.description[this.item.method]);
+                console.log("2 Método getDescription() = " + window.checkoutConfig.payment.description);
+                console.log("3 Método getDescription() = " + window.checkoutConfig.paycash_pay.description);
+                return window.checkoutConfig.payment.description[this.item.method];
+            }/*,
             country: function() {
                 console.log('getCountry()', window.checkoutConfig.paycash_pay.country);
                 return window.checkoutConfig.paycash_pay.country;
-            }
+            }*/
         });
     }
 );

@@ -43,7 +43,7 @@
                 </field>
                 <field id="pc_diasvigencia" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Vigencia (en días)</label>                    
-                    <validate>required-entry</validate>                      
+                    <validate>validate-number validate-zero-or-greater</validate>                      
                     <comment>Dejar vacío para no especificar vigencia.</comment> 
                 </field>     
                 <field id="description" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
@@ -51,7 +51,7 @@
                     <validate>required-entry</validate>                      
                     <comment>Descripción mostrada en la página de pago.</comment> 
                 </field>     
-                <field id="pc_instrucciones" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="instructions" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Instrucciones</label>                    
                     <validate>required-entry</validate>                      
                     <comment>Descripción mostrada en correos electrónicos y notificaciones.</comment> 

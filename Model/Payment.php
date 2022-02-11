@@ -11,12 +11,6 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Session as CustomerSession;
 
-/*use Magento\Store\Model\ScopeInterface;
-use Magento\Customer\Model\Customer;
-use Magento\Customer\Model\Session as CustomerSession;
-
-use Openpay\Data\Client as Paycash;*/
-
 /**
  * Class Payment
  *
@@ -26,7 +20,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 {
     const CODE = 'paycash_pay';
 
-    
     /*protected $_formBlockType = ;
     protected $_infoBlockType = ;
     protected $_isOffline = true;*/
@@ -40,7 +33,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $pc_pais = '';
     protected $pc_diasvigencia = '';
     protected $description = '';
-    protected $pc_instrucciones = '';
+    protected $instructions = '';
 
     protected $customerModel;
     protected $customerSession;
@@ -77,7 +70,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->pc_pais = $this->getConfigData('pc_pais');
         $this->pc_diasvigencia = $this->getConfigData('pc_diasvigencia');
         $this->description = $this->getConfigData('description');
-        $this->pc_instrucciones = $this->getConfigData('pc_instrucciones');
+        $this->instructions = $this->getConfigData('instructions');
 
 
         $this->customerModel = $customerModel;
@@ -140,16 +133,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
     public function getDescription()
     {
-        return $this->description;
+        return trim($this->getConfigData('description'));
     }
     
     public function createWebhook()
     {
 
     }
-
-
-
-
-
 }

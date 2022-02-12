@@ -133,7 +133,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
     public function getDescription()
     {
-        return trim($this->getConfigData('description'));
+        return $this->description;
     }
     
     public function createWebhook()

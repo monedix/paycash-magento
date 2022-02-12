@@ -51,7 +51,7 @@ class OpenpayConfigProvider implements ConfigProviderInterface
         $config = [];
         foreach ($this->methodCodes as $code) {
             if ($this->methods[$code]->isAvailable()) {
-                $config['paycash_pay']['active'] = $this->payment->isActive();
+                $config['paycash_pay']['active'] = $this->payment->isEnabled();
                 $config['paycash_pay']['sandbox'] = $this->payment->isSandbox();
                 $config['paycash_pay']['title'] = $this->payment->getTitle();
                 $config['paycash_pay']['test_apikey'] = $this->payment->getTestApikey();

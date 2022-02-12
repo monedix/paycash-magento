@@ -12,10 +12,10 @@ define(
             defaults: {
                 template: 'Paycash_Pay/payment/openpay-offline'
             },
-            isActive: function()
+            isEnabled: function()
             {
                 let dato = window.checkoutConfig.paycash_pay.active;
-                console.log("isActive() = " + dato);
+                console.log("isEnabled() = " + dato);
                 return dato;
             },
             isSandbox: function()

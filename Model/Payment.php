@@ -133,7 +133,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     /**
      * Métodos de acceso a las variables de la configuración
      */
-    public function isActive()
+    public function isEnabled()
     {
         return $this->active;
     }

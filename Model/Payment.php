@@ -38,6 +38,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
     protected $customerModel;
     protected $customerSession;
+
+    protected $_storeManager;
+    protected $logger;
+    protected $_transportBuilder;
     
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -47,13 +51,14 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         \Magento\Payment\Helper\Data $paymentData,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Payment\Model\Method\Logger $logger,
+        \Paycash\Pay\Mail\Template\TransportBuilder $transportBuilder,
         \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Psr\Log\LoggerInterface $logger_interface,
         \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
         \Magento\Framework\Filesystem\Io\File $file,
         Customer $customerModel,
-        CustomerSession $customerSession,            
+        CustomerSession $customerSession,
         array $data = []
     ) {
         parent::__construct(
@@ -73,6 +78,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $this->customerModel = $customerModel;
         $this->customerSession = $customerSession;
+
+        $this->_storeManager = $storeManager;
+        $this->logger = $logger_interface;
+        $this->_transportBuilder = $transportBuilder;
 
         //$this->_countryFactory = $countryFactory; //REVISAR
         //$url_base = $this->getUrlBaseOpenpay(); //REVISAR
@@ -180,6 +189,116 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
     public function createWebhook()
     {
-
+        $base_url = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+        $uri = $base_url."paycash/index/webhook";
     }
+
+    public function order(\Magento\Payment\Model\InfoInterface $payment, $amount)
+    {
+        $timezone = $this->scope_config->getValue('general/locale/timezone');
+        date_default_timezone_set($timezone);
+
+        //Obtiene el objeto de la orden
+        $order = $payment->getOrder();
+        //Obtiene el objeto billingAddress
+        $billing = $order->getBillingAddress();
+
+        try
+        {
+            //Obtiene datos del cliente
+            $customer_name = $billing->getFirstname();
+            $customer_lastname = $billing->getLastname();
+            $customer_email = $order->getCustomerEmail();
+
+            $customer_data = array
+            (
+                'name' => $customer_name,
+                'last_name' => $customer_lastname,
+                'email' => $customer_email
+            );
+
+            //REVISAR ESTA FUNCION PARA QUE VALIDE EN BASE A DIAS
+            $fecha_vigencia = date('Y-m-d\TH:i:s', strtotime('+ '.$this->validity.' hours'));
+
+            $charge_request = array(
+                'method' => 'store',
+                'currency' => strtolower($order->getBaseCurrencyCode()),
+                'amount' => $amount,
+                'description' => sprintf('ORDER #%s, %s', $order->getIncrementId(), $order->getCustomerEmail()),
+                'order_id' => $order->getIncrementId(),
+                'due_date' => $fecha_vigencia,
+                'customer' => $customer_data
+            );
+
+            //Conexion a PayCash para obtener referencia de pago
+            $referenciaDePago = "1234567890";
+            //Después de la conexión a PayCash
+
+            $payment->setTransactionId("IDPRUEBA");
+
+            //Actualizar el estado de la orden
+            $state = \Magento\Sales\Model\Order::STATE_NEW;
+            $order->setState($state)->setStatus($state);
+
+            //Guarda la referencia de pago
+            $order->setExtOrderId($referenciaDePago); 
+            $order->save();
+
+            //Envío de correo al cliente
+            $this->sendEmail($order);
+        }
+        catch (\Exception $e)
+        {
+            //REVISAR LAS DOS LINEAS SIGUIENTES PARA CONOCER COMO FUNCIONAN EXACTAMENTE
+            $this->debugData(['exception' => $e->getMessage()]);
+            $this->_logger->error(__( $e->getMessage()));
+            throw new \Magento\Framework\Validator\Exception(__($this->error($e)));
+        }
+
+        $payment->setSkipOrderProcessing(true);
+        return $this;
+    }
+
+    public function sendEmail($order)
+    {
+        $templateId = 'paycash_pdf_template';
+        $email = $this->scope_config->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
+        $name  = $this->scope_config->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
+        $toEmail = $order->getCustomerEmail();                    
+        
+        try
+        {
+            $template_vars = array(
+                'title' => 'Tu recibo de pago | Orden #'.$order->getIncrementId()
+            );
+
+            $storeId = $this->_storeManager->getStore()->getId();
+            $from = array('email' => $email, 'name' => $name);
+            
+            $templateOptions = [
+                'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                'store' => $storeId
+            ];
+
+            $this->logger->debug('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
+
+            $transportBuilderObj = $this->_transportBuilder->setTemplateIdentifier($templateId)
+            ->setTemplateOptions($templateOptions)
+            ->setTemplateVars($template_vars)
+            ->setFrom($from)
+            ->addTo($toEmail)
+            //->addAttachment($pdf, 'recibo_pago.pdf', 'application/octet-stream')
+            ->getTransport();
+            $transportBuilderObj->sendMessage(); 
+            return;
+        } 
+        catch (\Magento\Framework\Exception\MailException $me)
+        {            
+            $this->logger->error('#MailException', array('msg' => $me->getMessage()));
+        }
+        catch (\Exception $e)
+        {            
+            $this->logger->error('#Exception', array('msg' => $e->getMessage()));
+        }
+    }  
 }

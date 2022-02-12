@@ -10,7 +10,7 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Paycash_Pay/payment/openpay-offline'
+                template: 'Paycash_Pay/payment/paycash-offline'
             },
             isEnabled: function()
             {

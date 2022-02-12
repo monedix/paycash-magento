@@ -25,13 +25,14 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $_isOffline = true;
 
     protected $_code = self::CODE;
-    protected $pc_activo = true;
-    protected $pc_pruebas = true;
+
+    protected $active = true;
+    protected $sandbox = true;
     protected $title = '';
-    protected $pc_apitestkey = '';
-    protected $pc_apiproductionkey = '';
-    protected $pc_pais = '';
-    protected $pc_diasvigencia = '';
+    protected $test_apikey = '';
+    protected $production_apikey = '';
+    protected $country = '';
+    protected $validity = '';
     protected $description = '';
     protected $instructions = '';
 
@@ -60,22 +61,20 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $paymentData, $scopeConfig, $logger, null, null, $data     
         );
         
-        //$this->_countryFactory = $countryFactory; //REVISAR
-        
-        $this->pc_activo = $this->getConfigData('pc_activo');
-        $this->pc_pruebas = $this->getConfigData('pc_pruebas');
+        $this->active = $this->getConfigData('active');
+        $this->sandbox = $this->getConfigData('sandbox');
         $this->title = $this->getConfigData('title');
-        $this->pc_apitestkey = $this->getConfigData('pc_apitestkey');
-        $this->pc_apiproductionkey = $this->getConfigData('pc_apiproductionkey');
-        $this->pc_pais = $this->getConfigData('pc_pais');
-        $this->pc_diasvigencia = $this->getConfigData('pc_diasvigencia');
+        $this->test_apikey = $this->getConfigData('test_apikey');
+        $this->production_apikey = $this->getConfigData('production_apikey');
+        $this->country = $this->getConfigData('country');
+        $this->validity = $this->getConfigData('validity');
         $this->description = $this->getConfigData('description');
         $this->instructions = $this->getConfigData('instructions');
-
 
         $this->customerModel = $customerModel;
         $this->customerSession = $customerSession;
 
+        //$this->_countryFactory = $countryFactory; //REVISAR
         //$url_base = $this->getUrlBaseOpenpay(); //REVISAR
         //$this->pdf_url_base = $url_base . "/paynet-pdf"; //REVISAR
     }
@@ -131,11 +130,54 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         return $this;
     }
 
+    /**
+     * Métodos de acceso a las variables de la configuración
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    public function isSandbox()
+    {
+        return $this->sandbox;
+    }
+
+    /*public function getTitle()
+    {
+        return $this->title;
+    }*/
+
+    public function getTestApikey()
+    {
+        return $this->test_apikey;
+    }
+
+    public function getProductionApikey()
+    {
+        return $this->production_apikey;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function getValidity()
+    {
+        return $this->validity;
+    }
+    
     public function getDescription()
     {
         return $this->description;
     }
-    
+
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+
     public function createWebhook()
     {
 

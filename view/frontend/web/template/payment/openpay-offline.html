@@ -26,7 +26,8 @@
             <!--/ko-->
         </div>
         <p data-bind="text: getDescription()"></p>
-        <p>DESCRIPCION</p>
+        <p data-bind="text: getInstructions()"></p>
+        <p data-bind="text: getCountry()"></p>
 
         <div class="checkout-agreements-block">
             <!-- ko foreach: $parent.getRegion('before-place-order') -->

@@ -31,7 +31,6 @@ class OpenpayConfigProvider implements ConfigProviderInterface
 
     protected $cart;
 
-
     /**     
      * @param PaymentHelper $paymentHelper
      * @param OpenpayPayment $payment
@@ -52,8 +51,15 @@ class OpenpayConfigProvider implements ConfigProviderInterface
         $config = [];
         foreach ($this->methodCodes as $code) {
             if ($this->methods[$code]->isAvailable()) {
-                //$config['paycash_pay']['country'] = $this->payment->getCountry();
+                $config['paycash_pay']['active'] = $this->payment->isActive();
+                $config['paycash_pay']['sandbox'] = $this->payment->isSandbox();
+                $config['paycash_pay']['title'] = $this->payment->getTitle();
+                $config['paycash_pay']['test_apikey'] = $this->payment->getTestApikey();
+                $config['paycash_pay']['production_apikey'] = $this->payment->getProductionApikey();
+                $config['paycash_pay']['country'] = $this->payment->getCountry();
+                $config['paycash_pay']['validity'] = $this->payment->getValidity();
                 $config['paycash_pay']['description'] = $this->payment->getDescription();
+                $config['paycash_pay']['instructions'] = $this->payment->getInstructions();
             }
         }
                 

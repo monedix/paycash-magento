@@ -8,13 +8,13 @@
                 <comment>
                     <![CDATA[<a href="https://www.paycashglobal.com/" target="_blank">Crea tu cuenta en Paycash Global </a>]]>
                 </comment>
-                <field id="pc_activo" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Activar/Desactivar</label>
                     <validate>required-entry</validate>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Activa o desactiva el método de pago.</comment> 
                 </field>                
-                <field id="pc_pruebas" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sandbox" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Modo Pruebas</label>
                     <validate>required-entry</validate>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -25,23 +25,23 @@
                     <validate>required-entry</validate>                      
                     <comment>Título mostrado en la página de pago.</comment> 
                 </field> 
-                <field id="pc_apitestkey" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="test_apikey" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>PayCash API Test Key</label>                    
                     <validate>required-entry</validate>                      
                     <comment>Llave API de ambiente de pruebas (sandbox).</comment> 
                 </field> 
-                <field id="pc_apiproductionkey" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="production_apikey" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>PayCash API Production Key</label>                    
                     <validate>required-entry</validate>                      
                     <comment>Llave API de producción.</comment> 
                 </field>
-                <field id="pc_pais" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="country" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>País</label>
                     <validate>required-entry</validate>
                     <source_model>Paycash\Pay\Model\Source\Countries::getOptions</source_model>     
                     <comment>Seleccione el país.</comment>                
                 </field>
-                <field id="pc_diasvigencia" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="validity" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Vigencia (en días)</label>                    
                     <validate>validate-number validate-zero-or-greater</validate>                      
                     <comment>Dejar vacío para no especificar vigencia.</comment> 

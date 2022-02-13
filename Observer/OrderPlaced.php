@@ -13,7 +13,7 @@ class OrderPlaced implements ObserverInterface
 protected $payment;
  protected $logger;
 
- public function __construct(Payment $payment, LoggerInterface$logger) {
+ public function __construct(Payment $payment, LoggerInterface $logger) {
      $this->payment = $payment;
  $this->logger = $logger;
  }
@@ -24,6 +24,7 @@ protected $payment;
     {
         $order = $observer->getEvent()->getOrder();
 
+        $this->logger->info("SE EJECUTO LA FUNCION EXECUTE");
         $total = $order->getGrandTotal();
         $this->logger->info($total);
 

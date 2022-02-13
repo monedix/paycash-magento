@@ -5,6 +5,6 @@
         <observer name="paycash_pay_observer_check_config" instance="Paycash\Pay\Observer\CreateWebhook"/>
     </event>
     <event name="sales_order_place_after">
-        <observer name="paycash_pay_observer_order_placed" instance="Paycash\Pay\Observer\OrderPlaced"/>
+        <observer name="paycash_pay_observer_order_placed2" instance="Paycash\Pay\Observer\OrderPlaced"/>
     </event>
 </config>

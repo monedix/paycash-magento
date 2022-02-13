@@ -29,7 +29,7 @@ class OrderPlaced implements ObserverInterface
         $total = $order->getGrandTotal();
         $this->logger->info($total);
 
-        //return $this->payment->orderPlaced($order);
+        return $this->payment->orderPlaced($order);
     }
     catch (\Exception $e)
     {

@@ -3,7 +3,6 @@
     <default>   
         <payment>
             <paycash_pay>
-                <active>0</active>
                 <model>Paycash\Pay\Model\Payment</model>
                 <order_status>pending</order_status>
                 <allowspecific>0</allowspecific>

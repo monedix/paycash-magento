@@ -4,6 +4,7 @@ namespace Paycash\Pay\Helper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Helper\AbstractHelper;
 class Data extends AbstractHelper
 {
     protected $customerRepository;

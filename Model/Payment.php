@@ -5,6 +5,10 @@
  * See COPYING.txt for license details.
  */
 
+ /**
+ * @var \Magento\Framework\HTTP\Client\Curl
+ */
+protected $_curl;
 namespace Paycash\Pay\Model;
 
 use Magento\Store\Model\ScopeInterface;
@@ -45,6 +49,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     
     public function __construct(
         \Magento\Framework\Model\Context $context,
+        \Magento\Framework\HTTP\Client\Curl $curl,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Api\ExtensionAttributesFactory $extensionFactory,
         \Magento\Framework\Api\AttributeValueFactory $customAttributeFactory,
@@ -61,8 +66,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         CustomerSession $customerSession,
         array $data = []
     ) {
+        $this->_curl = $curl;
         parent::__construct(
-            $context, $registry, $extensionFactory, $customAttributeFactory,
+            $context, $curl, $registry, $extensionFactory, $customAttributeFactory,
             $paymentData, $scopeConfig, $logger, null, null, $data     
         );
         
@@ -246,6 +252,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
             //Envío de correo al cliente
             $this->sendEmail($order);
+
+            //solicitud a referencia de pago 
+            //$this->solicitudReferenciaDePago();
         }
         catch (\Exception $e)
         {
@@ -312,6 +321,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         try
         {
+            echo 'SE EJECUTO LA FUNCION DESDE PAYMENT';
             //Obtiene datos del cliente
             $customer_name = $billing->getFirstname();
             $customer_lastname = $billing->getLastname();
@@ -338,6 +348,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             );
 
             //Conexion a PayCash para obtener referencia de pago
+            //Codigo nuevo de conexion a Paycash
             $referenciaDePago = "1234567890";
             //Después de la conexión a PayCash
 
@@ -364,5 +375,46 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $payment->setSkipOrderProcessing(true);
         return $this;
+    }
+
+    public function solicitudReferenciaDePago()
+    {
+        //$url = 'localhost:30001/api/payCash/query/test?key=5d9d90c5013111ecaf8b0afe8920d1ea&numPedido=28&total=30.300000';
+        $test_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+        $ch = curl_init();
+
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_POSTFIELDS =>'{'.$parametroPais.'
+                  "Amount": "'.strval($totalOrden).'",
+                  "ExpirationDate": "'.strval($ExpirationDate).'",
+                  "Value": "'.strval($ordenID).'",
+                  "Type": "true"
+              }',
+            CURLOPT_HTTPHEADER => array(
+              'authorization: '.$token,
+              'Content-Type: application/json'
+            ),
+        ));
+        $data = curl_exec($ch);
+		curl_close($ch);
+		$body = json_decode($data);
+        $Reference = $body->Reference;
+        echo($Reference);
+
+        //if the method is get
+        //$this->_curl->get($url);
+        //if the method is post
+        //$this->_curl->post($url, $params);
+        //response will contain the output in form of JSON string
+        //$response = $this->_curl->getBody();
+        
     }
 }

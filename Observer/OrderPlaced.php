@@ -22,14 +22,15 @@ class OrderPlaced implements ObserverInterface
  {
     try 
     {
+        echo 'SE EJECUTO LA FUNCION EXECUTE 0';
         $this->logger->info("SE EJECUTO LA FUNCION EXECUTE 1");
         $order = $observer->getEvent()->getOrder();
 
         $this->logger->info("SE EJECUTO LA FUNCION EXECUTE 2");
         $total = $order->getGrandTotal();
         $this->logger->info($total);
-
-        return $this->payment->orderPlaced($order);
+        return true;
+        //return $this->payment->orderPlaced($order);
     }
     catch (\Exception $e)
     {

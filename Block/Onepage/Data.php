@@ -11,7 +11,7 @@ class Data extends AbstractHelper
     public function __construct(
         Context $context,
         CustomerRepositoryInterface $customerRepository,
-        CustomeSession $customerSession
+        CustomerSession $customerSession
         )
     {
         $this->customerRepository = $customerRepository;

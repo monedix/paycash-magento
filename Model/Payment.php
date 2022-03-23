@@ -203,7 +203,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $order = $payment->getOrder();
         //Obtiene el objeto billingAddress
         $billing = $order->getBillingAddress();
-
+        echo 'SE EJECUTO LA FUNCION EXECUTE desde payment';
         try
         {
             //Obtiene datos del cliente

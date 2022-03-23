@@ -142,8 +142,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         echo json_encode($body);
 
-
-        return $this;
+        die;
+        //return $this;
     }
 
 
@@ -162,6 +162,48 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         if (!$this->canCapture()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }
+
+
+        $token= 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';
+        $urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+        $totalOrden = 1000; //$order->getGrandTotal();
+        $ExpirationDate = '2022-03-30'; // manual o variable global o system
+        $ordenID = '00000001234';//$order->getIncrementId();
+
+        var_dump($payment->getData());
+
+        $ch = curl_init();
+						curl_setopt_array($ch, array(
+						  CURLOPT_URL => $urlObtenerReferencia,
+						  CURLOPT_RETURNTRANSFER => true,
+						  CURLOPT_ENCODING => '',
+						  CURLOPT_MAXREDIRS => 10,
+						  CURLOPT_TIMEOUT => 0,
+						  CURLOPT_FOLLOWLOCATION => true,
+						  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+						  CURLOPT_CUSTOMREQUEST => 'POST',
+						  CURLOPT_POSTFIELDS =>'{'.$parametroPais.'
+								"Amount": "'.strval($totalOrden).'",
+								"ExpirationDate": "'.strval($ExpirationDate).'",
+								"Value": "'.strval($ordenID).'",
+								"Type": "true"
+							}',
+						  CURLOPT_HTTPHEADER => array(
+							'authorization: '.$token,
+							'Content-Type: application/json'
+						  ),
+						));
+						
+						$data = curl_exec($ch);
+						curl_close($ch);
+						
+						$body = json_decode($data);
+
+
+        echo json_encode($body);
+
+        die;
+        
         return $this;
     }
     /**

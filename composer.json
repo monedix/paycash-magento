@@ -4,6 +4,7 @@
     "type": "magento2-module",    
     "minimum-stability": "dev",
     "license": "Apache-2.0",
+    "version":"2.3.1",
     "require": {
         "openpay/sdk": "2.2.*"
     },

@@ -103,7 +103,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         if (!$this->canAuthorize()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('The authorize action is not available.'));
         }
-
+        var_dump($payment->getData());
         $timezone = $this->scope_config->getValue('general/locale/timezone');
         date_default_timezone_set($timezone);
 
@@ -182,6 +182,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         if (!$this->canCapture()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }
+        var_dump($payment->getData());
         $timezone = $this->scope_config->getValue('general/locale/timezone');
         date_default_timezone_set($timezone);
 

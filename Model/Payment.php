@@ -182,6 +182,67 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         if (!$this->canCapture()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }
+        $timezone = $this->scope_config->getValue('general/locale/timezone');
+        date_default_timezone_set($timezone);
+
+        //Obtiene el objeto de la orden
+        $order = $payment->getOrder();
+        //Obtiene el objeto billingAddress
+        $billing = $order->getBillingAddress();
+        echo 'SE EJECUTO LA FUNCION EXECUTE desde payment';
+        try
+        {
+            //Obtiene datos del cliente
+            $customer_name = $billing->getFirstname();
+            $customer_lastname = $billing->getLastname();
+            $customer_email = $order->getCustomerEmail();
+
+            $customer_data = array
+            (
+                'name' => $customer_name,
+                'last_name' => $customer_lastname,
+                'email' => $customer_email
+            );
+
+            //REVISAR ESTA FUNCION PARA QUE VALIDE EN BASE A DIAS
+            $fecha_vigencia = date('Y-m-d\TH:i:s', strtotime('+ '.$this->validity.' hours'));
+
+            $charge_request = array(
+                'method' => 'store',
+                'currency' => strtolower($order->getBaseCurrencyCode()),
+                'amount' => $amount,
+                'description' => sprintf('ORDER #%s, %s', $order->getIncrementId(), $order->getCustomerEmail()),
+                'order_id' => $order->getIncrementId(),
+                'due_date' => $fecha_vigencia,
+                'customer' => $customer_data
+            );
+
+            //Conexion a PayCash para obtener referencia de pago
+            $referenciaDePago = "1234567890";
+            //Después de la conexión a PayCash
+
+            $payment->setTransactionId("IDPRUEBA");
+
+            //Actualizar el estado de la orden
+            $state = \Magento\Sales\Model\Order::STATE_NEW;
+            $order->setState($state)->setStatus($state);
+
+            //Guarda la referencia de pago
+            $order->setExtOrderId($referenciaDePago); 
+            $order->save();
+
+            //Envío de correo al cliente
+            $this->sendEmail($order);
+        }
+        catch (\Exception $e)
+        {
+            //REVISAR LAS DOS LINEAS SIGUIENTES PARA CONOCER COMO FUNCIONAN EXACTAMENTE
+            $this->debugData(['exception' => $e->getMessage()]);
+            $this->_logger->error(__( $e->getMessage()));
+            throw new \Magento\Framework\Validator\Exception(__($this->error($e)));
+        }
+
+        $payment->setSkipOrderProcessing(true);
         return $this;
     }
     /**

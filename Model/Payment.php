@@ -221,6 +221,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $dataforemail = [
             '_paychash_pay_day_limit' => 3,
             '_paychash_pay_autorization_token' => 'aqui va el token'
+            '_numDeReferncia' => 'FJKGIGJKFKFJGJHDDDFKFKFKF'
         ];
 
         $response = '12345678910';

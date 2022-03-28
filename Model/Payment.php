@@ -453,7 +453,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $toEmail = $order->getCustomerEmail();  
 
             $template_vars = array(
-                'title' => 'Tu recibo de pago | Orden #'.$order->getIncrementId(),
+                'title' => 'Tu numero de referencia | Orden #'.$order->getIncrementId(),
                 'adicional' => $dataforemail,
             );
 

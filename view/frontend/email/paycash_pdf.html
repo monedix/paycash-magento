@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 -->
-<!--@subject {{trans "Tu recibo de pago"}} @-->
+<!--@subject {{var title}} @-->
 
 {{template config_path="design/email/header_template"}}
 
@@ -16,5 +16,9 @@
         </td>
     </tr>    
 </table>
+
+Nueva informacion:
+{{var adicional._paychash_pay_autorization_token}}
+{{var adicional._paychash_pay_day_limit}}
 
 {{template config_path="design/email/footer_template"}}

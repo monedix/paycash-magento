@@ -27,6 +27,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
     protected $_code = self::CODE;
 
+
+    protected $_canOrder = true;
+    protected $_isGateway = true;
+    protected $_canCapture = true;
+    protected $_canAuthorize = true;
+    
+
     protected $active = true;
     protected $sandbox = true;
     protected $title = '';
@@ -98,7 +105,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      * @api
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function authorize(\Magento\Payment\Model\InfoInterface $payment, $amount)
+    public function authorizeNew(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
         if (!$this->canAuthorize()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('The authorize action is not available.'));
@@ -180,14 +187,59 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
      */
     public function capture(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
+        
         if (!$this->canCapture()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }        
-        echo 'SE EJECUTO LA FUNCION EXECUTE desde payment caprture';
+
+        //echo 'SE EJECUTO LA FUNCION EXECUTE desde payment capture';
+        $this->setLog('SE EJECUTO LA FUNCION EXECUTE desde payment capture');
+        //$this->setLog('capture: '. $payment->getData());
+
+
+        /* Aun no existe la orden */
+        $payment->setAdditionalInformation('_paychash_pay_day_limit', 3);
+        $payment->setAdditionalInformation('_paychash_pay_autorization_token', 'aqui va el token');
+        /* Otra forma de colocar los datos adicionales */
+        $info = $this->getInfoInstance();
+        $info->setCcType('Visa');
+        $info->setAdditionalInformation('card', 'un card');
+        
+        $order = $payment->getOrder();
+
+        /**********
+         * Aqui va la petición a la API
+         *******/
+
+        /*if($response['status'] == 200){
+            // metodo positivo
+        }else{
+            // respuesta negativa
+            //throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
+        }*/
+
+        $dataforemail = [
+            '_paychash_pay_day_limit' => 3,
+            '_paychash_pay_autorization_token' => 'aqui va el token'
+        ];
+
+        $response = '12345678910';
+
+        $message = 'Este es un mensaje en donde se puede agregar el id de transacción o el id de la orden';
+        
+        //$state = \Magento\Sales\Model\Order::STATE_NEW;
+        //$payment->setPreparedMessage($message);
+        $payment->setTransactionId($response)->setPreparedMessage($message)->setIsTransactionClosed(0);
+        //$payment->getOrder()->setState($state)->setStatus($state);
+        $this->setLog(json_encode($payment->getOrder()->getData()));
+        $this->sendEmail($order, $dataforemail);
+
+        /*
         var_dump($payment->getData());
         $timezone = $this->scope_config->getValue('general/locale/timezone');
         date_default_timezone_set($timezone);
-
+        */
+        /*
         //Obtiene el objeto de la orden
         $order = $payment->getOrder();
         //Obtiene el objeto billingAddress
@@ -246,6 +298,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         }
 
         $payment->setSkipOrderProcessing(true);
+        */
         return $this;
     }
     /**
@@ -320,7 +373,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $uri = $base_url."paycash/index/webhook";
     }
 
-    public function order(\Magento\Payment\Model\InfoInterface $payment, $amount)
+    public function orderNew(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
         $timezone = $this->scope_config->getValue('general/locale/timezone');
         date_default_timezone_set($timezone);
@@ -386,17 +439,21 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         return $this;
     }
 
-    public function sendEmail($order)
+    public function sendEmail($order, $dataforemail = array())
     {
-        $templateId = 'paycash_pdf_template';
-        $email = $this->scope_config->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
-        $name  = $this->scope_config->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
-        $toEmail = $order->getCustomerEmail();                    
+                          
         
         try
         {
+
+            $templateId = 'paycash_pdf_template';
+            $email = 'demo@demo.com'; //$this->scope_config->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
+            $name  = 'demo'; //$this->scope_config->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
+            $toEmail = $order->getCustomerEmail();  
+
             $template_vars = array(
-                'title' => 'Tu recibo de pago | Orden #'.$order->getIncrementId()
+                'title' => 'Tu recibo de pago | Orden #'.$order->getIncrementId(),
+                'adicional' => $dataforemail,
             );
 
             $storeId = $this->_storeManager->getStore()->getId();

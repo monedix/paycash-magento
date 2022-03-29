@@ -3,7 +3,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">    
     <body>
         <referenceBlock name="page.main.title">
-            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.print.button" template="button.phtml"/>
+           
             <action method="setPageTitle">
                 <argument translate="true" name="title" xsi:type="string">Gracias por tu compra!</argument>
             </action>

@@ -11,6 +11,6 @@ class Success extends \Magento\Framework\View\Element\Template
 
    public function refDePago()
    {
-       return '486404867fkgi343#343$5%634'
+       return '486404867fkgi343#343$5%634';
    }
 }

@@ -7,26 +7,8 @@
 
 <div class="checkout-success">
 <?php $mensaje = $block->one(); echo $mensaje;?>
-<h1>Hola otra vez Este es el numero de ref:</h1>
-    <?php if ($block->getOrderId()): ?>
-        <?php if ($block->getCanViewOrder()) : ?>
-            <p><?php echo __('El num de orden es is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
-        <?php else : ?>
-            <h1>Hola otra vez</h1>
-            <?php $mensaje = $block->one(); echo $mensaje;?>
-
-            <p><?php echo __('El numero de orden es # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
-        <?php endif; ?>
-        <p><?php /* @escapeNotVerified */ echo __('Te enviaremos un correo con informacion del rastreo de tu envio.') ?></p>
-
-        <?php if (isset($_SESSION['pdf_url'])): ?>
-            <div style="width: 70%">                
-                <iframe id="pdf" src="<?php echo $_SESSION["pdf_url"] ?>" style="width:100%; height:950px;" frameborder="0"></iframe>    
-            </div>  
-        <?php endif; ?>       
-
-        
-
+<h1>Hola otra vez FUERA DEL DIV</h1>
+    
 
     <div class="actions-toolbar">
         <div class="primary">

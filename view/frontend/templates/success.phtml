@@ -1,14 +1,11 @@
 
 <div>
-<?php $mensaje = $block->one(); echo $mensaje;?>
-<h1>Hola otra vez FUERA DEL DIV</h1>
-    
-
-    <div class="actions-toolbar">
-        <div class="primary">
-            <a class="action primary continue" href="<?php /* @escapeNotVerified */ echo $block->getUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Seguir comprando') ?></span></a>
-        </div>
-    </div>    
+    <p>A continuación encontrarás la referencia de pago, con la cual podrás presentarte en tu tienda más cercana para realizar tu pago.</p>
+    </p>
+    <img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="650" height="100">
+    </p>
+    <h1>Hola otra vez Referencia de pago:</h1>
+    <?php $mensaje = $block->one(); echo $mensaje;?>  
 </div>
 
 

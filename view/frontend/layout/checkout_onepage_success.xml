@@ -11,6 +11,6 @@
         <referenceContainer name="order.success.additional.info">
             <block class="Paycash\Pay\Block\Success" name="paycash.pay.onepage.success" template="Paycash_Pay::success.phtml"/>
         </referenceContainer>
-        <container name="order.success.additional.info" label="Order Success Additional Info"/>
+        
     </body>
 </page>

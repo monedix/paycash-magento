@@ -14,16 +14,14 @@
             <h1>{{var title}}</h1>
             <p>A continuación encontrarás la referencia de pago, con la cual podrás presentarte en tu tienda más cercana para realizar tu pago.</p>
             </p>
-            <img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="500" height="100">
-            <h1>Referencia de pago: </h1>
+            <img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="650" height="100">
+            <h1>Referencia: </h1>
             </p>
-            <h1>{{var adicional._paychash_pay_autorization_token}}</h1>
+            <h3>{{var adicional._paychash_pay_autorization_token}}</h3>
+            <h3>{{var adicional._paychash_pay_day_limit}}</h3>
         </td>
     </tr>    
 </table>
 
-Referencia de pago:
-{{var adicional._paychash_pay_autorization_token}}
-{{var adicional._paychash_pay_day_limit}}
 
 {{template config_path="design/email/footer_template"}}

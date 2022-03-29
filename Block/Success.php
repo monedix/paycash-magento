@@ -1,14 +1,15 @@
 <?php
 
 namespace Paycash\Pay\Block;
-use Paycash\Pay\Model\Payment as Payment;
+//use Paycash\Pay\Model\Payment as Payment;
 
 class Success extends \Magento\Framework\View\Element\Template
 {
-   protected $payment;
+    protected $instructions = '';
+   /*protected $payment;
    public function __construct(Payment $payment) {
         $this->payment = $payment;
-    }
+    }*/
 
    public function one()
    {
@@ -17,7 +18,8 @@ class Success extends \Magento\Framework\View\Element\Template
 
    public function refDePago()
    {
-        return $this->payment->getInstructions();
+        $this->instructions = $this->getConfigData('instructions');
+        return $this->instructions;
        //return '486404867fkgi343#343$5%634';
    }
 }

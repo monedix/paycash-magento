@@ -8,4 +8,9 @@ class Success extends \Magento\Framework\View\Element\Template
    {
        return 'Estamos en el bloque 5848676784759494';
    }
+
+   public function refDePago()
+   {
+       return '486404867fkgi343#343$5%634'
+   }
 }

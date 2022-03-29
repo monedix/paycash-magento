@@ -16,7 +16,7 @@
 
             <p><?php echo __('El numero de orden es # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
         <?php endif; ?>
-        <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details and tracking info.') ?></p>
+        <p><?php /* @escapeNotVerified */ echo __('Te enviaremos un correo con informacion del rastreo de tu envio.') ?></p>
 
         <?php if (isset($_SESSION['pdf_url'])): ?>
             <div style="width: 70%">                

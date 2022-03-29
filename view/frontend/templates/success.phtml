@@ -9,7 +9,7 @@
 <h1>Hola otra vez</h1>
     <?php if ($block->getOrderId()): ?>
         <?php if ($block->getCanViewOrder()) : ?>
-            <p><?php echo __('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
+            <p><?php echo __('El num de orden es is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
         <?php else : ?>
             <h1>Hola otra vez</h1>
             <?php $mensaje = $block->one(); echo $mensaje;?>

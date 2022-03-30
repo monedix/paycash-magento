@@ -375,7 +375,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $prueba1 = $this->getInstructions();
                         $dataforemail = [
                             '_paychash_pay_day_limit' => 3,
-                            '_paychash_pay_autorization_token' => $barcode,
+                            '_paychash_pay_autorization_token' => 'FIR88JG433498694#77FK77JDKGJ77DKF57JDGKDNHNPLHITL6444$5',
                             'instruccionesTres' => $prueba3,
                             'instruccionesDeUso' => $prueba1
                         ];

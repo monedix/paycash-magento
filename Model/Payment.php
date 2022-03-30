@@ -211,20 +211,20 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
          * Aqui va la petición a la API
          **********************************************************************/
         //should be dynamic after test
-        //$paycashps_test_key =  $this->getTestApikey();
-		//$paycashps_production_key = $this->getProductionApikey();
+        $paycashps_test_key =  $this->getTestApikey();
+		$paycashps_production_key = $this->getProductionApikey();
         $this->setLog('INICIO PETICION');
-        $paycashps_test_key =  '5d9d90c5013111ecaf8b0afe8920d1ea';
-		$paycashps_production_key = '5d9d90c5013111ecaf8b0afe8920d1ea';
+        //$paycashps_test_key =  '5d9d90c5013111ecaf8b0afe8920d1ea';
+		//$paycashps_production_key = '5d9d90c5013111ecaf8b0afe8920d1ea';
 
         $test_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';
         $test_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
 
-        $produccion_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';		
-		$produccion_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+        //$produccion_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';		
+		//$produccion_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
 
-		//$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';		
-		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
+		$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';		
+		$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
         $this->setLog('INICIO REF DE PAGO=====================================================================');
         $this->setLog(json_encode($payment->getOrder()));

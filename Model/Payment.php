@@ -237,6 +237,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->setLog($vigenciaEnDias);
 
         $this->setLog($order);
+        foreach ($obj as $key => $value) {
+            echo "$key => $value\n";
+            $this->setLog($key);
+            //$this->setLog($value\n);
+        }
         //$totalOrden = $orden->total_paid;
        
         $apiKeyGral = ($testmode) ? $paycashps_test_key : $paycashps_production_key;

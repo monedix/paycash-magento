@@ -284,14 +284,19 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 curl_close($ch); 
                 $this-> setLog('CERRADO CONEXCION CURL');
                 $body = json_decode($data);
+                $this-> setLog('IMPRIMOS RESPUESTA DEL TOKEN');
+
+                $this->setLog($body);
 
                 $this-> setLog('ANTES DE VERIFICACION SI ERROR AL OBTENER TOKEN');
                 if($body->ErrorCode != 0)
                 {
+                    $this-> setLog('SI BODY TIENE ERROR');
                     throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener token.'));
                 }
                 else
                 {
+                    $this-> setLog('DENTRO DE LA AUTORIZACION');
                     $token = $body->Authorization;
                     $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
                     
@@ -302,6 +307,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $parametroPais = '"country" : "'.$country.'",';
                     }
                     
+                    $this-> setLog('INICIA CURL INIT PARA REF DE PAGO');
                     $ch = curl_init();
                     
                     curl_setopt_array($ch, array(
@@ -324,22 +330,25 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         'Content-Type: application/json'
                         ),
                     ));
-                    
+                    $this-> setLog('EJECUTAMOS PEITICON A PAYCASH');
                     $data = curl_exec($ch);
                     curl_close($ch);
+                    $this-> setLog('PETICION CERRADA A PAYCASH');
                     
                     $body = json_decode($data);
                     
                     if($body->ErrorCode != 0)
                     {
+                        $this-> setLog('ALGUN ERROR AL PEDIR PETICION DE PAYCASH');
                         throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener referencia de pago.'));
                     }
                     else
                     {
+                        $this-> setLog('ASIGNAMOS LA RESPUESTA DE PAYCASH');
                         $Reference = $body->Reference;
                         $barcode = $Reference;
-                        echo 'REFERENCIA DE PAGO';
-                        echo $barcode;
+                        $this-> setLog('IMPRIME REFERENCIA DE PAGO');
+                        $this-> setLog($barcode);
                     }
                 }
             }

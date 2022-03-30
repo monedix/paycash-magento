@@ -239,7 +239,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->setLog($order);
         //$totalOrden = $orden->total_paid;
        
-        $apiKeyGral = ($testMode) ? $paycashps_test_key : $paycashps_production_key;
+        $apiKeyGral = ($testmode) ? $paycashps_test_key : $paycashps_production_key;
         $this->setLog('asigno apikEyGral');
         $this->setLog($apiKeyGral);
 
@@ -257,7 +257,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 $this->setLog($urlObtenerReferencia);
             }
             $this->setLog('DESPUES DE IF TEST MODE');
-            //echo $testMode ;
             $headers = array
             (
                 'Content-Type : application/json',

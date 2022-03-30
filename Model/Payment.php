@@ -217,15 +217,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             // respuesta negativa
             //throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }*/
-        $prueba2 =  $this->instructions;
+        //$prueba2 =  $this->instructions;
         $prueba3 = 'algoDe Mensaje';
 
-        $prueba1 = $this->getInstructions();
+        //$prueba1 = $this->getInstructions();
         $dataforemail = [
             '_paychash_pay_day_limit' => 3,
             '_paychash_pay_autorization_token' => 'FIR88JG433498694#77FK77JDKGJ77DKF57JDGKDNHNPLHITL6444$5',
-            'instruccionesDeUso' => $prueba1,
-            'instruccionesDos' => $prueba2,
             'instruccionesTres' => $prueba3
         ];
 

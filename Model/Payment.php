@@ -228,8 +228,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $this->setLog('INICIO REF DE PAGO=====================================================================');
         $this->setLog(json_encode($payment->getOrder()->getData()));
-
-        testmode = $this->isSandbox();
+        $this->setLog(json_decode($payment->getOrder()->getData()));
+        $testmode = $this->isSandbox();
         $this->setLog($testmode);
 
         $country = $this->getCountry();
@@ -238,7 +238,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $vigenciaEnDias = $this->getValidity();
         $this->setLog($vigenciaEnDias);
 
-        $totalOrden = $orden->total_paid;
+        $totalOrden = $order->total_paid;
         $this->setLog($totalOrden);
 
         $ordenID = $order->getIncrementId();

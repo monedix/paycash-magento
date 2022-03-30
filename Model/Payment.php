@@ -239,11 +239,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $vigenciaEnDias = $this->getValidity();
         $this->setLog($vigenciaEnDias);
 
-        $totalOrden = json_decode($order->getData());
+        $totalOrden = $order->getGrandTotal()
         $this->setLog($totalOrden->grand_total);
 
-        $otroTotal = json_decode($order->getData());
-        $this->setLog($otroTotal->total_due);
+        //$otroTotal = json_decode($order->getData());
+        //$this->setLog($otroTotal->total_due);
 
         $ordenID = $order->getIncrementId();
         $this->setLog($ordenID);

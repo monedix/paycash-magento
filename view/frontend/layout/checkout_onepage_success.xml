@@ -6,7 +6,10 @@
             <action method="setPageTitle">
                 <argument translate="true" name="title" xsi:type="string">Gracias por tu compra!</argument>
             </action>
-            <block class="Paycash\Pay\Block\Success" name="paycash.pay.onepage.success" template="Paycash_Pay::success.phtml"/>
+            <block class="Paycash\Pay\Block\Success" 
+                   name="paycash.pay.onepage.success" 
+                   template="Paycash_Pay::success.phtml"
+            />
         </referenceBlock>
         
     </body>

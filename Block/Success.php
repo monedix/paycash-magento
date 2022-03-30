@@ -1,16 +1,15 @@
 <?php
 
 namespace Paycash\Pay\Block;
-//use Paycash\Pay\Model\Payment as OPayment;
+use Paycash\Pay\Model\Payment as OPayment;
 
 class Success extends \Magento\Framework\View\Element\Template
-{ 
-   //protected $payment ;
+{
    //protected $instructions = '';
-   /*protected $payment;
+   protected $payment;
    public function __construct(OPayment $payment) {
         $this->payment = $payment;
-    }*/
+    }
 
    public function one()
    {
@@ -24,8 +23,8 @@ class Success extends \Magento\Framework\View\Element\Template
         return '486404867fkgi343#343$5%634';
    }
 
-   /*public function obtenerInstruct()
+   public function obtenerInstruct()
    {
        return  $this->payment->getInstructions();
-   }*/
+   }
 }

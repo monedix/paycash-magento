@@ -201,7 +201,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $payment->setAdditionalInformation('_paychash_pay_day_limit', 3);
         $payment->setAdditionalInformation('_paychash_pay_autorization_token', 'aqui va el token');
         /* Otra forma de colocar los datos adicionales */
-        $info = $this->getInfoInstance();
+        $info = $this->getInfoInstance();//verificar para mandar a succes phph
         $info->setCcType('Visa');
         $info->setAdditionalInformation('card', 'un card');
         
@@ -677,7 +677,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         return $this;
     }
 
-    public function obtenerRefPayCash()
+    /*public function obtenerRefPayCash()
     {
         $refPago = "";
         $refToken = "";
@@ -689,5 +689,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		//'paycashps_production_key', '5d9d90c5013111ecaf8b0afe8920d1ea'
         //$value_paycashps_test_key = (string) Tools::getValue('paycashps_test_key');
 		//$value_paycashps_production_key = (string) Tools::getValue('paycashps_production_key');
+    }*/
+
+    public function setLog($log)
+    {
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/paycash.log');
+        $logger = new \Zend_Log();
+        $logger->addWriter($writer);
+        $logger->info($log);
     }
 }

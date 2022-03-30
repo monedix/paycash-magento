@@ -278,11 +278,14 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HEADER, 0); 
+                $this-> setLog('ANTES EXEC CURL');
                 $data = curl_exec($ch); 
+                $this-> setLog('DESPUES EXEC CURL');
                 curl_close($ch); 
-                
+                $this-> setLog('CERRADO CONEXCION CURL');
                 $body = json_decode($data);
-                
+
+                $this-> setLog('ANTES DE VERIFICACION SI ERROR AL OBTENER TOKEN');
                 if($body->ErrorCode != 0)
                 {
                     throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener token.'));

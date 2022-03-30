@@ -440,9 +440,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     }
 
     public function sendEmail($order, $dataforemail = array())
-    {
-                          
-        
+    {    
         try
         {
 

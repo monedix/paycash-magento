@@ -235,14 +235,15 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $this->setLog($order);
         //$totalOrden = $orden->total_paid;
-
+        print_r($order);
+        var_dump($order);
        
         $this->setLog('=====================================================================');
-        
+       
         $apiKeyGral = ($testMode) ? $paycashps_test_key : $paycashps_production_key;
         $this->setLog('asigno apikEyGral');
         $this->setLog($apiKeyGral);
-        
+
         if($apiKeyGral != '')
 		{
             $urlObtenerToken = $test_urlObtenerToken;

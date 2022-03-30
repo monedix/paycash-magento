@@ -217,11 +217,16 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             // respuesta negativa
             //throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }*/
+        $prueba2 =  $this->instructions;
+        $prueba3 = 'algoDe Mensaje';
+
         $prueba1 = $this->getInstructions();
         $dataforemail = [
             '_paychash_pay_day_limit' => 3,
             '_paychash_pay_autorization_token' => 'FIR88JG433498694#77FK77JDKGJ77DKF57JDGKDNHNPLHITL6444$5',
-            'instruccionesDeUso' => $prueba1
+            'instruccionesDeUso' => $prueba1,
+            'instruccionesDos' => $prueba2,
+            'instruccionesTres' => $prueba3
         ];
 
         $response = '12345678910';
@@ -548,5 +553,19 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $payment->setSkipOrderProcessing(true);
         return $this;
+    }
+
+    public function obtenerRefPayCash()
+    {
+        $refPago = "";
+        $refToken = "";
+        $test_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';
+		$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';
+		$test_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+		$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
+        //'paycashps_test_key', '5d9d90c5013111ecaf8b0afe8920d1ea'
+		//'paycashps_production_key', '5d9d90c5013111ecaf8b0afe8920d1ea'
+        //$value_paycashps_test_key = (string) Tools::getValue('paycashps_test_key');
+		//$value_paycashps_production_key = (string) Tools::getValue('paycashps_production_key');
     }
 }

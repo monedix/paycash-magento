@@ -207,10 +207,134 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         
         $order = $payment->getOrder();
 
-        /**********
+        /**********************************************************************
          * Aqui va la petición a la API
-         *******/
+         **********************************************************************/
+        //should be dynamic after test
+        //$paycashps_test_key =  $this->getTestApikey();
+		//$paycashps_production_key = $this->getProductionApikey();
 
+        $paycashps_test_key =  '5d9d90c5013111ecaf8b0afe8920d1ea';
+		$paycashps_production_key = '5d9d90c5013111ecaf8b0afe8920d1ea';
+
+        $test_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';
+        $test_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+
+		//$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';		
+		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
+
+        echo '=====================================================================';
+        $testMode = $this->isSandbox();
+        echo $testMode;
+
+        $country = $this->getCountry();
+        echo $country;
+
+        $vigenciaEnDias = $this->getValidity();
+        echo $vigenciaEnDias;
+
+        echo $order;
+        //$totalOrden = $orden->total_paid;
+
+       
+        echo '======================================================================';
+        
+        $apiKeyGral = ($testMode) ? $paycashps_test_key : $paycashps_production_key;
+
+        if($apiKeyGral != '')
+		{
+            $urlObtenerToken = $test_urlObtenerToken;
+			$urlObtenerReferencia = $test_urlObtenerReferencia;
+
+            if($testmode != '1')
+            {
+                $urlObtenerToken = $produccion_urlObtenerToken.$country;
+                $urlObtenerReferencia = $produccion_urlObtenerReferencia;
+            }
+            echo $testMode ;
+            $headers = array
+            (
+                'Content-Type : application/json',
+                'key : '.$apiKeyGral
+            );
+            if (!function_exists('curl_version'))
+            {
+                throw new \Magento\Framework\Exception\LocalizedException(__('Error no se puede proceder a conectar con el servicio de PayCash porque no ha habilitado CURL para PHP .'));
+            }
+            else
+            {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $urlObtenerToken);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HEADER, 0); 
+                $data = curl_exec($ch); 
+                curl_close($ch); 
+                
+                $body = json_decode($data);
+                
+                if($body->ErrorCode != 0)
+                {
+                    throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener token.'));
+                }
+                else
+                {
+                    $token = $body->Authorization;
+                    $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
+                    
+                    $parametroPais = '';
+                    
+                    if($testmode != '1')
+                    {
+                        $parametroPais = '"country" : "'.$country.'",';
+                    }
+                    
+                    $ch = curl_init();
+                    
+                    curl_setopt_array($ch, array(
+                        CURLOPT_URL => $urlObtenerReferencia,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS =>'{'.$parametroPais.'
+                            "Amount": "'.strval($totalOrden).'",
+                            "ExpirationDate": "'.strval($ExpirationDate).'",
+                            "Value": "'.strval($ordenID).'",
+                            "Type": "true"
+                        }',
+                        CURLOPT_HTTPHEADER => array(
+                        'authorization: '.$token,
+                        'Content-Type: application/json'
+                        ),
+                    ));
+                    
+                    $data = curl_exec($ch);
+                    curl_close($ch);
+                    
+                    $body = json_decode($data);
+                    
+                    if($body->ErrorCode != 0)
+                    {
+                        throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener referencia de pago.'));
+                    }
+                    else
+                    {
+                        $Reference = $body->Reference;
+                        $barcode = $Reference;
+                        echo 'REFERENCIA DE PAGO';
+                        echo $barcode;
+                    }
+                }
+            }
+        }
+        else
+		{
+            throw new \Magento\Framework\Exception\LocalizedException(__('No se puede proceder a conectar con el servicio de PayCash favor de verificar la configuración de conexión.'));
+		}
         /*if($response['status'] == 200){
             // metodo positivo
         }else{

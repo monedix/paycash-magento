@@ -370,6 +370,26 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $barcode = $Reference;
                         $this-> setLog('IMPRIME REFERENCIA DE PAGO');
                         $this-> setLog($barcode);
+
+                        $prueba3 = 'algoDe Mensaje';
+                        $prueba1 = $this->getInstructions();
+                        $dataforemail = [
+                            '_paychash_pay_day_limit' => 3,
+                            '_paychash_pay_autorization_token' => $barcode,
+                            'instruccionesTres' => $prueba3,
+                            'instruccionesDeUso' => $prueba1
+                        ];
+
+                        $response = '12345678910';
+
+                        $message = 'Este es un mensaje en donde se puede agregar el id de transacción o el id de la orden';
+                        
+                        //$state = \Magento\Sales\Model\Order::STATE_NEW;
+                        //$payment->setPreparedMessage($message);
+                        $payment->setTransactionId($response)->setPreparedMessage($message)->setIsTransactionClosed(0);
+                        //$payment->getOrder()->setState($state)->setStatus($state);
+                        $this->setLog(json_encode($payment->getOrder()->getData()));
+                        $this->sendEmail($order, $dataforemail);
                     }
                 }
             }
@@ -386,25 +406,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         }*/
         //$prueba2 =  $this->instructions;
         $this->setLog('FIN REF DE PAGO=====================================================================');
-        $prueba3 = 'algoDe Mensaje';
-        $prueba1 = $this->getInstructions();
-        $dataforemail = [
-            '_paychash_pay_day_limit' => 3,
-            '_paychash_pay_autorization_token' => 'FIR88JG433498694#77FK77JDKGJ77DKF57JDGKDNHNPLHITL6444$5',
-            'instruccionesTres' => $prueba3,
-            'instruccionesDeUso' => $prueba1
-        ];
-
-        $response = '12345678910';
-
-        $message = 'Este es un mensaje en donde se puede agregar el id de transacción o el id de la orden';
         
-        //$state = \Magento\Sales\Model\Order::STATE_NEW;
-        //$payment->setPreparedMessage($message);
-        $payment->setTransactionId($response)->setPreparedMessage($message)->setIsTransactionClosed(0);
-        //$payment->getOrder()->setState($state)->setStatus($state);
-        $this->setLog(json_encode($payment->getOrder()->getData()));
-        $this->sendEmail($order, $dataforemail);
 
         /*
         var_dump($payment->getData());

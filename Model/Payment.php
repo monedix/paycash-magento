@@ -227,8 +227,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
         $this->setLog('INICIO REF DE PAGO=====================================================================');
+        $this->setLog(json_encode($payment->getOrder()));
         $this->setLog(json_encode($payment->getOrder()->getData()));
-        $this->setLog(json_decode($payment->getOrder()->getData()));
+    
         $testmode = $this->isSandbox();
         $this->setLog($testmode);
 
@@ -238,8 +239,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $vigenciaEnDias = $this->getValidity();
         $this->setLog($vigenciaEnDias);
 
-        $totalOrden = $order->total_paid;
+        $totalOrden = $order->getData()->grand_total;
         $this->setLog($totalOrden);
+
+        $otroTotal = $order->getData()->total_due;
+        $this->setLog($otroTotal);
 
         $ordenID = $order->getIncrementId();
         $this->setLog($ordenID);

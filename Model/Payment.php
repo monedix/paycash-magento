@@ -213,7 +213,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         //should be dynamic after test
         //$paycashps_test_key =  $this->getTestApikey();
 		//$paycashps_production_key = $this->getProductionApikey();
-
+        $this->setLog('INICIO PETICION');
         $paycashps_test_key =  '5d9d90c5013111ecaf8b0afe8920d1ea';
 		$paycashps_production_key = '5d9d90c5013111ecaf8b0afe8920d1ea';
 
@@ -223,21 +223,21 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		//$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';		
 		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
-        echo '=====================================================================';
+        $this->setLog('=====================================================================');
         $testMode = $this->isSandbox();
-        echo $testMode;
+        $this->setLog($testMode);
 
         $country = $this->getCountry();
-        echo $country;
+        $this->setLog($country);
 
         $vigenciaEnDias = $this->getValidity();
-        echo $vigenciaEnDias;
+        $this->setLog($vigenciaEnDias);
 
-        echo $order;
+        $this->setLog($order);
         //$totalOrden = $orden->total_paid;
 
        
-        echo '======================================================================';
+        $this->setLog('=====================================================================');
         
         $apiKeyGral = ($testMode) ? $paycashps_test_key : $paycashps_production_key;
 

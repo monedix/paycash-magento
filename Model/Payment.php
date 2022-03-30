@@ -227,8 +227,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
         $this->setLog('INICIO REF DE PAGO=====================================================================');
-        $testMode = $this->isSandbox();
-        $this->setLog($testMode);
+        $testmode = $this->isSandbox();
+        $this->setLog($testmode);
 
         $country = $this->getCountry();
         $this->setLog($country);

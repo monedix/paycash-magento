@@ -250,7 +250,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $this->setLog('ANTES DE IF TEST MODE');
             if($testmode != '1')
             {
-                $this->setLog('DENTRO DE IF TEST MODE no deberia entrar aaqui');
+                $this->setLog('DENTRO DE IF TEST MODE CUANDO PROD');
                 $urlObtenerToken = $produccion_urlObtenerToken.$country;
                 $this->setLog($urlObtenerToken);
                 $urlObtenerReferencia = $produccion_urlObtenerReferencia;
@@ -268,10 +268,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
             if (!function_exists('curl_version'))
             {
-                throw new \Magento\Framework\Exception\LocalizedException(__('Error no se puede proceder a conectar con el servicio de PayCash porque no ha habilitado CURL para PHP .'));
+                $this-> setLog('Error no se puede proceder a conectar con el servicio de PayCash porque no ha habilitado CURL para PHP .');
             }
             else
             {
+                $this-> setLog('INICIANDO CURL');
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $urlObtenerToken);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

@@ -247,6 +247,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		{
             $urlObtenerToken = $test_urlObtenerToken;
 			$urlObtenerReferencia = $test_urlObtenerReferencia;
+            $this->setLog($urlObtenerReferencia);
             $this->setLog('ANTES DE IF TEST MODE');
             if($testmode != '1')
             {
@@ -298,8 +299,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 {
                     $this-> setLog('DENTRO DE LA AUTORIZACION');
                     $token = $body->Authorization;
+                    $this-> setLog($token);
                     $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
                     
+                    $this-> setLog($ExpirationDate);
                     $parametroPais = '';
                     
                     if($testmode != '1')
@@ -309,7 +312,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                     
                     $this-> setLog('INICIA CURL INIT PARA REF DE PAGO');
                     $ch = curl_init();
-                    
+
+                    $this-> setLog('PREPARA SETOPT DE CURL');
                     curl_setopt_array($ch, array(
                         CURLOPT_URL => $urlObtenerReferencia,
                         CURLOPT_RETURNTRANSFER => true,
@@ -330,7 +334,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         'Content-Type: application/json'
                         ),
                     ));
-                    $this-> setLog('EJECUTAMOS PEITICON A PAYCASH');
+                    $this-> setLog('EJECUTAMOS PETICON A PAYCASH');
                     $data = curl_exec($ch);
                     curl_close($ch);
                     $this-> setLog('PETICION CERRADA A PAYCASH');

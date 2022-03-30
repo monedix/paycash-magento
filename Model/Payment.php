@@ -220,10 +220,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $test_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';
         $test_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
 
+        $produccion_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';		
+		$produccion_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+
 		//$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';		
 		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
-        $this->setLog('=====================================================================');
+        $this->setLog('INICIO REF DE PAGO=====================================================================');
         $testMode = $this->isSandbox();
         $this->setLog($testMode);
 
@@ -235,10 +238,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $this->setLog($order);
         //$totalOrden = $orden->total_paid;
-        print_r($order);
-        var_dump($order);
-       
-        $this->setLog('=====================================================================');
        
         $apiKeyGral = ($testMode) ? $paycashps_test_key : $paycashps_production_key;
         $this->setLog('asigno apikEyGral');
@@ -248,18 +247,26 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		{
             $urlObtenerToken = $test_urlObtenerToken;
 			$urlObtenerReferencia = $test_urlObtenerReferencia;
-
+            $this->setLog('ANTES DE IF TEST MODE');
             if($testmode != '1')
             {
+                $this->setLog('DENTRO DE IF TEST MODE no deberia entrar aaqui');
                 $urlObtenerToken = $produccion_urlObtenerToken.$country;
+                $this->setLog($urlObtenerToken);
                 $urlObtenerReferencia = $produccion_urlObtenerReferencia;
+                $this->setLog($urlObtenerReferencia);
             }
-            echo $testMode ;
+            $this->setLog('DESPUES DE IF TEST MODE');
+            //echo $testMode ;
             $headers = array
             (
                 'Content-Type : application/json',
                 'key : '.$apiKeyGral
             );
+
+            $this->setLog('LOS HEADERS');
+            $this->setLog($headers);
+
             if (!function_exists('curl_version'))
             {
                 throw new \Magento\Framework\Exception\LocalizedException(__('Error no se puede proceder a conectar con el servicio de PayCash porque no ha habilitado CURL para PHP .'));
@@ -345,6 +352,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             //throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }*/
         //$prueba2 =  $this->instructions;
+        $this->setLog('FIN REF DE PAGO=====================================================================');
         $prueba3 = 'algoDe Mensaje';
         $prueba1 = $this->getInstructions();
         $dataforemail = [

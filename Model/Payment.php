@@ -227,7 +227,9 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		//$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
         $this->setLog('INICIO REF DE PAGO=====================================================================');
-        $testmode = $this->isSandbox();
+        $this->setLog(json_encode($payment->getOrder()->getData()));
+
+        testmode = $this->isSandbox();
         $this->setLog($testmode);
 
         $country = $this->getCountry();
@@ -236,13 +238,19 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $vigenciaEnDias = $this->getValidity();
         $this->setLog($vigenciaEnDias);
 
-        $this->setLog($order);
+        $totalOrden = $orden->total_paid;
+        $this->setLog($totalOrden);
+
+        $ordenID = $order->getIncrementId();
+        $this->setLog($ordenID);
+
+        /*$this->setLog($order);
         foreach ($order as $key => $value) {
             //echo "$key => $value\n";
             $this->setLog($key);
             $this->setLog($value);
-        }
-        //$totalOrden = $orden->total_paid;
+        }*/
+        
        
         $apiKeyGral = ($testmode) ? $paycashps_test_key : $paycashps_production_key;
         $this->setLog('asigno apikEyGral');

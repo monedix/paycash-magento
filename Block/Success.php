@@ -1,15 +1,15 @@
 <?php
 
 namespace Paycash\Pay\Block;
-use Paycash\Pay\Model\Payment as OPayment;
+//use Paycash\Pay\Model\Payment as OPayment;
 
 class Success extends \Magento\Framework\View\Element\Template
 {
    //protected $instructions = '';
-   protected $payment;
+   /*protected $payment;
    public function __construct(OPayment $payment) {
         $this->payment = $payment;
-    }
+    }*/
 
    public function one()
    {
@@ -20,11 +20,11 @@ class Success extends \Magento\Framework\View\Element\Template
    {
         //$this->instructions = $this->getConfigData('instructions');
         //return $this->instructions;
-        return '486404867fkgi343#343$5%634';
+        return ' ';//aqui va la referncia de pago para mostrar en succes.phtml
    }
 
-   public function obtenerInstruct()
+   /*public function obtenerInstruct()
    {
        return  $this->payment->getInstructions();
-   }
+   }*/
 }

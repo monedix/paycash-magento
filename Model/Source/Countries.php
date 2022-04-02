@@ -10,10 +10,11 @@ class Countries
     public function getOptions()
     {
         return array(
-            array('value' => 'MX', 'label' => 'México'),
-            array('value' => 'CO', 'label' => 'Colombia'),
-            array('value' => 'EC', 'label' => 'Ecuador'),
-            array('value' => 'PE', 'label' => 'Perú')
+            array('value' => 'MEX', 'label' => 'México'),
+            array('value' => 'COL', 'label' => 'Colombia'),
+            array('value' => 'ECU', 'label' => 'Ecuador'),
+            array('value' => 'PER', 'label' => 'Perú'),
+            array('value' => 'CRI', 'label' => 'Costa Rica')
         );     
     }
 }

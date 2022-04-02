@@ -18,7 +18,7 @@
                 <title>Paga en efectivo con PayCash</title> 
                 <test_apikey></test_apikey>
                 <production_apikey></production_apikey>
-                <country>MX</country>                
+                <country>MEX</country>                
                 <validity>3</validity>
                 <description>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</description>
                 <instructions>Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</instructions>                                             

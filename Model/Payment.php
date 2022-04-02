@@ -213,7 +213,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         //should be dynamic after test
         $paycashps_test_key =  $this->getTestApikey();
 		$paycashps_production_key = $this->getProductionApikey();
-        $this->setLog('INICIO PETICION');
+        //$this->setLog('INICIO PETICION');
         //$paycashps_test_key =  '5d9d90c5013111ecaf8b0afe8920d1ea';
 		//$paycashps_production_key = '5d9d90c5013111ecaf8b0afe8920d1ea';
 
@@ -226,27 +226,27 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 		$produccion_urlObtenerToken = 'https://sb-api-global-emisor.paycashglobal.com/v1/authre?country=';		
 		$produccion_urlObtenerReferencia = 'https://sb-api-global-emisor.paycashglobal.com/v1/reference';
 
-        $this->setLog('INICIO REF DE PAGO=====================================================================');
-        $this->setLog(json_encode($payment->getOrder()));
-        $this->setLog(json_encode($payment->getOrder()->getData()));
+        //$this->setLog('INICIO REF DE PAGO=====================================================================');
+        //$this->setLog(json_encode($payment->getOrder()));
+        //$this->setLog(json_encode($payment->getOrder()->getData()));
     
         $testmode = $this->isSandbox();
-        $this->setLog($testmode);
+        //$this->setLog($testmode);
 
         $country = $this->getCountry();
         $this->setLog($country);
 
         $vigenciaEnDias = $this->getValidity();
-        $this->setLog($vigenciaEnDias);
+        //$this->setLog($vigenciaEnDias);
 
         $totalOrden = $order->getGrandTotal();
-        $this->setLog($totalOrden);
+        //$this->setLog($totalOrden);
 
         //$otroTotal = json_decode($order->getData());
         //$this->setLog($otroTotal->total_due);
 
         $ordenID = $order->getIncrementId();
-        $this->setLog($ordenID);
+        //$this->setLog($ordenID);
 
         /*$this->setLog($order);
         foreach ($order as $key => $value) {
@@ -257,32 +257,32 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         
        
         $apiKeyGral = ($testmode) ? $paycashps_test_key : $paycashps_production_key;
-        $this->setLog('asigno apikEyGral');
-        $this->setLog($apiKeyGral);
+        //$this->setLog('asigno apikEyGral');
+        //$this->setLog($apiKeyGral);
 
         if($apiKeyGral != '')
 		{
             $urlObtenerToken = $test_urlObtenerToken;
 			$urlObtenerReferencia = $test_urlObtenerReferencia;
-            $this->setLog($urlObtenerReferencia);
-            $this->setLog('ANTES DE IF TEST MODE');
+            //$this->setLog($urlObtenerReferencia);
+            //$this->setLog('ANTES DE IF TEST MODE');
             if($testmode != '1')
             {
-                $this->setLog('DENTRO DE IF TEST MODE CUANDO PROD');
+                //$this->setLog('DENTRO DE IF TEST MODE CUANDO PROD');
                 $urlObtenerToken = $produccion_urlObtenerToken.$country;
-                $this->setLog($urlObtenerToken);
+                //$this->setLog($urlObtenerToken);
                 $urlObtenerReferencia = $produccion_urlObtenerReferencia;
-                $this->setLog($urlObtenerReferencia);
+                //$this->setLog($urlObtenerReferencia);
             }
-            $this->setLog('DESPUES DE IF TEST MODE');
+            //$this->setLog('DESPUES DE IF TEST MODE');
             $headers = array
             (
                 'Content-Type : application/json',
                 'key : '.$apiKeyGral
             );
 
-            $this->setLog('LOS HEADERS');
-            $this->setLog($headers);
+            //$this->setLog('LOS HEADERS');
+            //$this->setLog($headers);
 
             if (!function_exists('curl_version'))
             {
@@ -290,36 +290,36 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             }
             else
             {
-                $this-> setLog('INICIANDO CURL');
+                //$this-> setLog('INICIANDO CURL');
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $urlObtenerToken);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HEADER, 0); 
-                $this-> setLog('ANTES EXEC CURL');
+                //$this-> setLog('ANTES EXEC CURL');
                 $data = curl_exec($ch); 
-                $this-> setLog('DESPUES EXEC CURL');
+                //$this-> setLog('DESPUES EXEC CURL');
                 curl_close($ch); 
-                $this-> setLog('CERRADO CONEXCION CURL');
+                //$this-> setLog('CERRADO CONEXCION CURL');
                 $body = json_decode($data);
-                $this-> setLog('IMPRIMOS RESPUESTA DEL TOKEN');
+                //$this-> setLog('IMPRIMOS RESPUESTA DEL TOKEN');
 
-                $this->setLog($body);
+                //$this->setLog($body);
 
-                $this-> setLog('ANTES DE VERIFICACION SI ERROR AL OBTENER TOKEN');
+                //$this-> setLog('ANTES DE VERIFICACION SI ERROR AL OBTENER TOKEN');
                 if($body->ErrorCode != 0)
                 {
-                    $this-> setLog('SI BODY TIENE ERROR');
+                    //$this-> setLog('SI BODY TIENE ERROR');
                     throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener token.'));
                 }
                 else
                 {
-                    $this-> setLog('DENTRO DE LA AUTORIZACION');
+                    //$this-> setLog('DENTRO DE LA AUTORIZACION');
                     $token = $body->Authorization;
-                    $this-> setLog($token);
+                    //$this-> setLog($token);
                     $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
                     
-                    $this-> setLog($ExpirationDate);
+                    //$this-> setLog($ExpirationDate);
                     $parametroPais = '';
                     
                     if($testmode != '1')
@@ -327,10 +327,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $parametroPais = '"country" : "'.$country.'",';
                     }
                     
-                    $this-> setLog('INICIA CURL INIT PARA REF DE PAGO');
+                    //$this-> setLog('INICIA CURL INIT PARA REF DE PAGO');
                     $ch = curl_init();
 
-                    $this-> setLog('PREPARA SETOPT DE CURL');
+                    //$this-> setLog('PREPARA SETOPT DE CURL');
                     curl_setopt_array($ch, array(
                         CURLOPT_URL => $urlObtenerReferencia,
                         CURLOPT_RETURNTRANSFER => true,
@@ -351,10 +351,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         'Content-Type: application/json'
                         ),
                     ));
-                    $this-> setLog('EJECUTAMOS PETICON A PAYCASH');
+                    //$this-> setLog('EJECUTAMOS PETICON A PAYCASH');
                     $data = curl_exec($ch);
                     curl_close($ch);
-                    $this-> setLog('PETICION CERRADA A PAYCASH');
+                    //$this-> setLog('PETICION CERRADA A PAYCASH');
                     
                     $body = json_decode($data);
                     
@@ -365,11 +365,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                     }
                     else
                     {
-                        $this-> setLog('ASIGNAMOS LA RESPUESTA DE PAYCASH');
+                        //$this-> setLog('ASIGNAMOS LA RESPUESTA DE PAYCASH');
                         $Reference = $body->Reference;
                         $barcode = $Reference;
-                        $this-> setLog('IMPRIME REFERENCIA DE PAGO');
-                        $this-> setLog($barcode);
+                        //$this-> setLog('IMPRIME REFERENCIA DE PAGO');
+                        //$this-> setLog($barcode);
 
                         $prueba3 = 'algoDe Mensaje';
                         $prueba1 = $this->getInstructions();
@@ -388,7 +388,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         //$payment->setPreparedMessage($message);
                         $payment->setTransactionId($response)->setPreparedMessage($message)->setIsTransactionClosed(0);
                         //$payment->getOrder()->setState($state)->setStatus($state);
-                        $this->setLog(json_encode($payment->getOrder()->getData()));
+                        //$this->setLog(json_encode($payment->getOrder()->getData()));
                         $this->sendEmail($order, $dataforemail);
                     }
                 }
@@ -405,7 +405,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             //throw new \Magento\Framework\Exception\LocalizedException(__('The capture action is not available.'));
         }*/
         //$prueba2 =  $this->instructions;
-        $this->setLog('FIN REF DE PAGO=====================================================================');
+        //$this->setLog('FIN REF DE PAGO=====================================================================');
         
 
         /*

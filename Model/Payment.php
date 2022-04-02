@@ -370,6 +370,18 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $barcode = $Reference;
                         //$this-> setLog('IMPRIME REFERENCIA DE PAGO');
                         //$this-> setLog($barcode);
+                        $logo = '';
+                        //country banner
+                        if($country == 'COL')
+                            $logo = 'https://paycash-storage.s3.amazonaws.com/PCDocs/COL/colombia.jpg';
+                        else if($country == 'CRI')
+                            $logo = 'https://paycash-storage.s3.amazonaws.com/PCDocs/CRI/costarica.jpg';
+                        else if($country == 'ECU')
+                            $logo = 'https://paycash-storage.s3.amazonaws.com/PCDocs/ECU/ecuador.jpg';
+                        else if($country == 'MEX')
+                            $logo = 'https://paycash-storage.s3.amazonaws.com/PCDocs/MEX/mexico.jpg';
+                        else if($country == 'PER')
+                            $logo = 'https://paycash-storage.s3.amazonaws.com/PCDocs/PER/peru.jpg';
 
                         $prueba3 = 'algoDe Mensaje';
                         $prueba1 = $this->getInstructions();
@@ -377,7 +389,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                             '_paychash_pay_day_limit' => 3,
                             '_paychash_pay_autorization_token' => $barcode,
                             'instruccionesTres' => $prueba3,
-                            'instruccionesDeUso' => $prueba1
+                            'instruccionesDeUso' => $prueba1,
+                            '_paycash_pay_logo' => $logo
                         ];
 
                         $response = '12345678910';

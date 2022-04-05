@@ -48,6 +48,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     protected $customerSession;
 
     protected $_storeManager;
+    protected $_urlInterface;
     protected $logger;
     protected $_transportBuilder;
     
@@ -67,6 +68,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         \Magento\Framework\Filesystem\Io\File $file,
         Customer $customerModel,
         CustomerSession $customerSession,
+        \Magento\Framework\UrlInterface $urlInterface, 
         array $data = []
     ) {
         parent::__construct(
@@ -88,6 +90,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->customerSession = $customerSession;
 
         $this->_storeManager = $storeManager;
+        $this->_urlInterface = $urlInterface;
         $this->logger = $logger_interface;
         $this->_transportBuilder = $transportBuilder;
 
@@ -248,6 +251,33 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $ordenID = $order->getIncrementId();
         //$this->setLog($ordenID);
 
+
+        $this->setLog('getSTOREMANAGERDATA INICIO');
+
+        $this->setLog($this->_storeManager->getStore()->getId());
+        $this->setLog($this->_storeManager->getStore()->getBaseUrl());
+        $this->setLog($this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB));
+        $this->setLog($this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_DIRECT_LINK));
+        $this->setLog($this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA));
+        $this->setLog($this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_STATIC));
+        $this->setLog($this->_storeManager->getStore()->getUrl('product/33'));
+        $this->setLog($this->_storeManager->getStore()->getCurrentUrl(false));
+        $this->setLog($this->_storeManager->getStore()->getBaseMediaDir());
+        $this->setLog($this->_storeManager->getStore()->getBaseStaticDir());
+        $this->setLog('getSTOREMANAGERDATA FIN');
+
+
+        $this->setLog('getURLINTERFACE INICIO');
+        $this->setLog('getCurrentURL');
+        $this->setLog($this->_urlInterface->getCurrentUrl());
+        $this->setLog('getURL');
+        $this->setLog($this->_urlInterface->getUrl());
+        $this->setLog('getURL HELLOWORLD GENERAL ENABLED');
+        $this->setLog($this->_urlInterface->getUrl('helloworld/general/enabled'));
+        $this->setLog('getBaseURL');
+        $this->setLog($this->_urlInterface->getBaseUrl());
+        $this->setLog('getURLINTERFACE FIN');
+
         /*$this->setLog($order);
         foreach ($order as $key => $value) {
             //echo "$key => $value\n";
@@ -365,9 +395,12 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                     }
                     else
                     {
+                        $urlTemporal = '';
+                        $urlTemporal = $this->_urlInterface->getBaseUrl();
                         //$this-> setLog('ASIGNAMOS LA RESPUESTA DE PAYCASH');
                         $Reference = $body->Reference;
-                        $codeBarr = $Reference;
+                        //$codeBarr = $this->barcode($urlTemporal.'/temp/qr_'.$ordenID.'.png', $Reference, '90');
+                        
                         //$this-> setLog('IMPRIME REFERENCIA DE PAGO');
                         //$this-> setLog($codeBarr);
                         $logo = '';

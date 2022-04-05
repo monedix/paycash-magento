@@ -19,6 +19,21 @@
         <!--/ko-->
         <div class="payment-method-billing-address">
             <p data-bind="text: getDescription()"></p>
+            <div id="col-stores-container" data-bind="visible: country() === 'COL'">  
+                <img src="https://paycash-storage.s3.amazonaws.com/PCDocs/COL/colombia.jpg" alt="PayCash" width="500" height="100">
+            </div>
+            <div id="cri-stores-container" data-bind="visible: country() === 'CRI'">  
+                <img src="https://paycash-storage.s3.amazonaws.com/PCDocs/CRI/costarica.jpg" alt="PayCash" width="500" height="100">
+            </div>
+            <div id="ecu-stores-container" data-bind="visible: country() === 'ECU'">  
+                <img src="https://paycash-storage.s3.amazonaws.com/PCDocs/ECU/ecuador.jpg" alt="PayCash" width="500" height="100">
+            </div>
+            <div id="mex-stores-container" data-bind="visible: country() === 'MEX'">  
+                <img src="https://paycash-storage.s3.amazonaws.com/PCDocs/MEX/mexico.jpg" alt="PayCash" width="500" height="100">
+            </div>
+            <div id="per-stores-container" data-bind="visible: country() === 'PER'">  
+                <img src="https://paycash-storage.s3.amazonaws.com/PCDocs/PER/peru.jpg" alt="PayCash" width="500" height="100">
+            </div>
             <!--<img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="500" height="100">-->
             <!-- <h3 style="border-bottom: 1px solid #cccccc; padding-bottom: 15px;">Realiza tu pago en efectivo en cualquiera de los establecimientos afiliados a PayCash con la referencia mostrada a continuación</h3> -->
             <!--p data-bind="html: getDescription()"></p> -->

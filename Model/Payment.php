@@ -389,7 +389,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                             '_paychash_pay_day_limit' => 3,
                             '_paychash_pay_autorization_token' => $barcode,
                             'instruccionesTres' => $prueba3,
-                            'instruccionesDeUso' => $prueba1,
+                            '_paycash_pay_instrucciones' => $prueba1,
                             '_paycash_pay_logo' => $logo
                         ];
 

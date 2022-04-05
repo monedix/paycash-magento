@@ -19,6 +19,7 @@
         <!--/ko-->
         <div class="payment-method-billing-address">
             <p data-bind="text: getDescription()"></p>
+            </p>
             <div id="col-stores-container" data-bind="visible: getCountry() === 'COL'">  
                 <img src="https://paycash-storage.s3.amazonaws.com/PCDocs/COL/colombia.jpg" alt="PayCash" width="700" height="150">
             </div>
@@ -41,6 +42,7 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
+        </p>
         
         <div class="checkout-agreements-block">
             <!-- ko foreach: $parent.getRegion('before-place-order') -->

@@ -399,7 +399,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $urlTemporal = $this->_urlInterface->getBaseUrl();
                         //$this-> setLog('ASIGNAMOS LA RESPUESTA DE PAYCASH');
                         $Reference = $body->Reference;
-                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE var log')
+                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE var log');
                         $this->setLog(BP . '/var/log/'.$ordenID.'.png');
 
                         try{
@@ -410,7 +410,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                             $this->setLog("error creando barcode 1:".$e->getMessage());
                         }
 
-                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE app temp')
+                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE app temp');
                         $this->setLog(BP . '/app/code/Paycash/Pay/temp/'.$ordenID.'.png');
 
                         try{

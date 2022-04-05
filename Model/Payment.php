@@ -268,13 +268,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
 
         $this->setLog('getURLINTERFACE INICIO');
-        $this->setLog('getCurrentURL');
+        //$this->setLog('getCurrentURL');
         $this->setLog($this->_urlInterface->getCurrentUrl());
-        $this->setLog('getURL');
+        //$this->setLog('getURL');
         $this->setLog($this->_urlInterface->getUrl());
-        $this->setLog('getURL HELLOWORLD GENERAL ENABLED');
+        //$this->setLog('getURL HELLOWORLD GENERAL ENABLED');
         $this->setLog($this->_urlInterface->getUrl('helloworld/general/enabled'));
-        $this->setLog('getBaseURL');
+        //$this->setLog('getBaseURL');
         $this->setLog($this->_urlInterface->getBaseUrl());
         $this->setLog('getURLINTERFACE FIN');
 
@@ -399,8 +399,28 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $urlTemporal = $this->_urlInterface->getBaseUrl();
                         //$this-> setLog('ASIGNAMOS LA RESPUESTA DE PAYCASH');
                         $Reference = $body->Reference;
-                        //$codeBarr = $this->barcode($urlTemporal.'/temp/qr_'.$ordenID.'.png', $Reference, '90');
-                        
+                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE var log')
+                        $this->setLog(BP . '/var/log/'.$ordenID.'.png');
+
+                        try{
+
+                            $codeBarr1 = $this->barcode(BP . '/var/log/'.$ordenID.'.png', $Reference, '90');
+                        }
+                        catch(\Exception $e){
+                            $this->setLog("error creando barcode 1:".$e->getMessage());
+                        }
+
+                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE app temp')
+                        $this->setLog(BP . '/app/code/Paycash/Pay/temp/'.$ordenID.'.png');
+
+                        try{
+
+                            $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/temp/'.$ordenID.'.png', $Reference, '90');
+                        }
+                        catch(\Exception $e){
+                            $this->setLog("error creando barcode 2:".$e->getMessage());
+                        }
+
                         //$this-> setLog('IMPRIME REFERENCIA DE PAGO');
                         //$this-> setLog($codeBarr);
                         $logo = '';

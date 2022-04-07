@@ -374,11 +374,11 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         }
 
                         $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE app temp');
-                        $this->setLog(BP . '/app/code/Paycash/Pay/temp/'.$ordenID.'.png');
+                        $this->setLog(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png');
 
                         try{
 
-                            $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/temp/'.$ordenID.'.png', $Reference, '90');
+                            $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png', $Reference, '90');
                         }
                         catch(\Exception $e){
                             $this->setLog("error creando barcode 2:".$e->getMessage());

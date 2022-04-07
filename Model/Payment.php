@@ -414,7 +414,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $payment->setAdditionalInformation('instruccionesTres', $prueba3);
                         $payment->setAdditionalInformation('_paycash_pay_instrucciones', $prueba1);
                         $payment->setAdditionalInformation('_paycash_pay_logo', $logo);
-                        $payment->setAdditionalInformation('_paycash_data', json_encode($dataforemail));
+                        $payment->setAdditionalInformation('_paycash_pay_urlLogoBarCode', $urlLogoBarCode);
+                        //$payment->setAdditionalInformation('_paycash_data', json_encode($dataforemail));
 
                         $response = '12345678910';
 

@@ -37,10 +37,15 @@ class Success extends \Magento\Framework\View\Element\Template
         return $this->getInformationOrder()['_paychash_pay_autorization_token']; //$this->getInformationOrder());//aqui va la referncia de pago para mostrar en succes.phtml
    }
 
-   /*public function obtenerInstruct()
+   public function obtenerInstruct()
    {
-       return  $this->payment->getInstructions();
-   }*/
+       return  $this->getInformationOrder()['_paycash_pay_instrucciones'];
+   }
+
+   public function obtenerBarCode(){
+    return  $this->getInformationOrder()['_paycash_pay_urlLogoBarCode'];
+   }
+
    public function getLastOrderId(){
      return $this->checkoutSession->getData('last_order_id');
    }

@@ -1,7 +1,13 @@
 
 <div>
-    <p>Se enviara una referencia de pago a tu correo con la cual podrás presentarte en tu tienda más cercana para realizar tu pago.</p>
+    <h2> 
+        <?php 
+            $instruct = $block->obtenerInstruct(); 
+            echo $instruct;
+        ?>  
+    </h2>
     </p>
+    <img src="$block->obtenerBarCode" alt="PayCash" width="650" height="100">
     <!--<img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="650" height="100">-->
     </p>
     <h2>

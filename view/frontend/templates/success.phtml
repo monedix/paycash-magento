@@ -7,14 +7,12 @@
         ?>  
     </h2>
     </p>
-    <img src="<?php $block->obtenerBarCode(); ?>" alt="SuccessPayCash" width="650" height="100">
+    <img src="<?php echo $block->obtenerBarCode(); ?>" alt="SuccessPayCash" width="650" height="100">
     <!--<img src="https://comprobante.realvirtual.com.mx/comprobante_digital/paycash/icon.png" alt="PayCash" width="650" height="100">-->
     </p>
     <h2>
-        Url: 
         <?php 
-            $mensaje = $block->obtenerBarCode(); 
-            echo $mensaje;
+            echo $block->obtenerBarCode();
         ?>  
     </h2>
     </p>

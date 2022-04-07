@@ -358,32 +358,33 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                     }
                     else
                     {
-                        $urlTemporal = '';
+                        //$urlTemporal = '';
                         $urlTemporal = $this->_urlInterface->getBaseUrl();
                         $Reference = $body->Reference;
-                        $this-> setLog('Exec peticion paycash ref de pago sucess');
-                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE var log');
-                        $this->setLog(BP . '/var/log/'.$ordenID.'.png');
+                        //$this-> setLog('Exec peticion paycash ref de pago sucess');
+                        //$this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE var log');
+                        //$this->setLog(BP . '/var/log/'.$ordenID.'.png');
 
-                        try{
+                        /*try{
 
                             $codeBarr1 = $this->barcode(BP . '/var/log/'.$ordenID.'.png', $Reference, '90');
                         }
                         catch(\Exception $e){
                             $this->setLog("error creando barcode 1:".$e->getMessage());
-                        }
+                        }*/
 
-                        $this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE app temp');
-                        $this->setLog(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png');
-
+                        //$this->setLog('PRUEBA DE URL Y CREACiON DE BARCODE app temp');
+                        //$this->setLog(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png');
+                        $urlLogoBarCode = '';
                         try{
-
                             $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png', $Reference, '90');
+                            $this->setLog($codeBarr2);
+                            $urlLogoBarCode = BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png';
                         }
                         catch(\Exception $e){
                             $this->setLog("error creando barcode 2:".$e->getMessage());
                         }
-
+                        
                         $logo = '';
                         if($country == 'COL')
                             $logo = 'https://paycash-storage.s3.amazonaws.com/PCDocs/COL/colombia.jpg';
@@ -403,7 +404,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                             '_paychash_pay_autorization_token' => $Reference,
                             'instruccionesTres' => $prueba3,
                             '_paycash_pay_instrucciones' => $prueba1,
-                            '_paycash_pay_logo' => $logo
+                            '_paycash_pay_logo' => $logo,
+                            '_paycash_pay_urlLogoBarCode' => $urlLogoBarCode
                         ];
 
                         $response = '12345678910';

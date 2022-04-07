@@ -201,8 +201,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
 
         /* Aun no existe la orden */
-        $payment->setAdditionalInformation('_paychash_pay_day_limit', 3);
-        $payment->setAdditionalInformation('_paychash_pay_autorization_token', 'aqui va el token');
+        //$payment->setAdditionalInformation('_paychash_pay_day_limit', 3);
+        //$payment->setAdditionalInformation('_paychash_pay_autorization_token', 'aqui va el token');
         /* Otra forma de colocar los datos adicionales */
         $info = $this->getInfoInstance();//verificar para mandar a succes phph
         $info->setCcType('Visa');
@@ -415,6 +415,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         $payment->setAdditionalInformation('_paycash_pay_instrucciones', $prueba1);
                         $payment->setAdditionalInformation('_paycash_pay_logo', $logo);
                         $payment->setAdditionalInformation('_paycash_pay_urlLogoBarCode', $urlLogoBarCode);
+                        $payment->setAdditionalInformation('_paychash_pay_day_limit', $ExpirationDate);
                         //$payment->setAdditionalInformation('_paycash_data', json_encode($dataforemail));
 
                         $response = '12345678910';

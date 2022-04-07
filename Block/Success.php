@@ -46,6 +46,10 @@ class Success extends \Magento\Framework\View\Element\Template
     return  $this->getInformationOrder()['_paycash_pay_urlLogoBarCode'];
    }
 
+   public function obtenerExpirationDt(){
+       return $this->getInformationOrder()['_paychash_pay_day_limit'];
+   }
+
    public function getLastOrderId(){
      return $this->checkoutSession->getData('last_order_id');
    }

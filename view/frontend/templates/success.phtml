@@ -18,6 +18,13 @@
         ?>  
     </h2>
     </p>
+    <h2>
+        La referencia de pago expira el: 
+        <?php 
+            $mensaje = $block->obtenerExpirationDt(); 
+            echo $mensaje;
+        ?>  
+    </h2>
     </p>
 </div>
 

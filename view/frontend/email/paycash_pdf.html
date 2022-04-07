@@ -10,7 +10,7 @@
 
 <table>    
     <tr class="email-summary">
-        <td>
+        <td align="center">
             <h1>{{var title}}</h1>
             <p>{{var adicional._paycash_pay_instrucciones}}</p>
             </p>
@@ -18,11 +18,13 @@
             </p>
             <h1>Referencia: </h1>
         </p>
-            <img style="position: relative; display: inline-block; left: 50%; transform: translate(-50%);" src="{{var adicional._paycash_pay_urlLogoBarCode}}" alt="BarCodeImg" width="400" height="100">
+        <div>
+            <img src="{{var adicional._paycash_pay_urlLogoBarCode}}" alt="BarCodeImg" width="400" height="100">
+        </div>
         </p>
             <h3>{{var adicional._paychash_pay_autorization_token}}</h3>
             <h3>Tiempo limite dias: {{var adicional._paychash_pay_day_limit}}</h3>
-            </p>
+        </p>
         </td>
     </tr>    
 </table>

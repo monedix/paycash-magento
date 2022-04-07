@@ -409,6 +409,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                             '_paycash_pay_urlLogoBarCode' => $urlLogoBarCode
                         ];
 
+                        /*$payment->setAdditionalInformation('_paychash_pay_day_limit', 3); YA se llamó anteriormente */
+                        $payment->setAdditionalInformation('_paychash_pay_autorization_token', $Reference);
+                        $payment->setAdditionalInformation('instruccionesTres', $prueba3);
+                        $payment->setAdditionalInformation('_paycash_pay_instrucciones', $prueba1);
+                        $payment->setAdditionalInformation('_paycash_pay_logo', $logo);
+                        $payment->setAdditionalInformation('_paycash_data', json_encode($dataforemail));
+
                         $response = '12345678910';
 
                         $message = 'Este es un mensaje en donde se puede agregar el id de transacción o el id de la orden';

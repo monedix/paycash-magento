@@ -37,25 +37,20 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         $this->invoiceService = $invoiceService;
     }
 
-    /**
-     * Load the page defined in view/frontend/layout/openpay_index_webhook.xml
-     * URL /openpay/index/webhook
-     *
-     * @return \Magento\Framework\View\Result\Page
-     */
+
     public function execute() {        
         $this->logger->debug('#webhook');        
         try {
             $body = file_get_contents('php://input');        
             $json = json_decode($body);                    
 
-            $openpay = $this->payment->getOpenpayInstance();
+            $paycash = $this->payment->getOpenpayInstance();
             
             if(isset($json->transaction->customer_id)){
-                $customer = $openpay->customers->get($json->transaction->customer_id);
+                $customer = $paycash->customers->get($json->transaction->customer_id);
                 $charge = $customer->charges->get($json->transaction->id);
             }else{
-                $charge = $openpay->charges->get($json->transaction->id);
+                $charge = $paycash->charges->get($json->transaction->id);
             }
 
             $this->logger->debug('#webhook', array('trx_id' => $json->transaction->id, 'status' => $charge->status));        

@@ -39,7 +39,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
 
     public function execute() {        
-        $this->logger->debug('#webhook');        
+        $this->logger->debug('#webhook');   
+        $this-> setLog($body);     
         try {
             $body = file_get_contents('php://input');        
             $json = json_decode($body);                    
@@ -113,6 +114,14 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     public function validateForCsrf(RequestInterface $request): ?bool
     {
         return true;
+    }
+
+    public function setLog($log)
+    {
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/paycash.log');
+        $logger = new \Zend_Log();
+        $logger->addWriter($writer);
+        $logger->info($log);
     }
 
 }

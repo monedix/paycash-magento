@@ -44,6 +44,11 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         try {
             $body = file_get_contents('php://input');        
             $json = json_decode($body); 
+
+            $this-> setLog("id cliente de la transaccion con json");
+            $this-> setLog($json);            
+            $this-> setLog($json->transaction);
+            $this-> setLog($json->transaction->customer_id);
             
             $this-> setLog("id cliente de la transaccion con body");
             $this-> setLog($body);   

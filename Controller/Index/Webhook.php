@@ -45,7 +45,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         try {
             $body = file_get_contents('php://input');        
             $json = json_decode($body); 
-            $this-> setLog($body);                      
+            $this-> setLog($body);   
+            $this-> setLog($json);                   
 
             $paycash = $this->payment->getOpenpayInstance();
             

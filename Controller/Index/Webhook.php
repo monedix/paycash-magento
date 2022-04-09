@@ -44,22 +44,18 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         try {
             $body = file_get_contents('php://input');        
             $json = json_decode($body); 
-
-            $this-> setLog("id cliente de la transaccion con json");
-            $this-> setLog($json);            
-            $this-> setLog($json->transaction);
-            $this-> setLog($json->transaction->customer_id);
             
             $this-> setLog("id cliente de la transaccion con body");
             $this-> setLog($body);   
-            $this-> setLog($body->transaction);
-            $this-> setLog($body->transaction->customer_id);
+
+            $this-> setLog($json->order_id);  
+            $this-> setLog($json->paid_at);  
+            $this-> setLog($json->charge);  
+            $this-> setLog($json->payment_method);  
+
+            $this-> setLog("impresion de request data completa...");
             
-            $this-> setLog("id cliente de la transaccion con json");
-            $this-> setLog($json);            
-            $this-> setLog($json->transaction);
-            $this-> setLog($json->transaction->customer_id);
-            
+            $this-> setLog("validando...");
 
             $paycash = $this->payment->getOpenpayInstance();
             $this-> setLog('Despues de getOpenPayInstance');

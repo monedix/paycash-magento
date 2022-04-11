@@ -54,6 +54,11 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog($json->payment_method);  
 
             $this-> setLog("impresion de request data completa...");
+
+            $order_id = $json->order_id;
+            $paid_at = $json->paid_at;
+            $charge = $json->charge;
+            $payment_method = $json->payment_method;
             
             $this-> setLog("validando...");
 

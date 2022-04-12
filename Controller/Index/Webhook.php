@@ -5,7 +5,8 @@ namespace Paycash\Pay\Controller\Index;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Paycash\Pay\Model\Payment as OpenpayPayment;
+use Paycash\Pay\Model\Payment as PayCashPayment;
+//use Paycash\Pay\Model\Payment as OpenpayPayment;
 
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -26,7 +27,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     public function __construct(
             Context $context,             
             \Magento\Framework\App\Request\Http $request, 
-            OpenpayPayment $payment, 
+            //OpenpayPayment $payment, 
+            PayCashPayment $payment,
             \Psr\Log\LoggerInterface $logger_interface,
             \Magento\Sales\Model\Service\InvoiceService $invoiceService
     ) {
@@ -54,6 +56,12 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog($json->payment_method);  
 
             $this-> setLog("impresion de request data completa...");
+
+            $orderId_test = 182;
+            $objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
+            $orderTest = $objectManager_Test->create('\Magento\Sales\Model\OrderRepository')->get($orderId_test);
+            $this-> setLog("esto es el order test");
+            $this-> setLog($orderTest);
 
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;

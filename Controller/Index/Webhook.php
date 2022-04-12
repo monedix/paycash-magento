@@ -64,7 +64,24 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog($objectManager_Test);
             
             try {                
-                $orderTest = $objectManager_Test->create('\Magento\Sales\Model\OrderRepository')->get(182);
+                $orderTest = $objectManager_Test->create('\Magento\Sales\Model\OrderRepository')/*->get(182)*/;
+                $orderItems = $orderTest->getAllItems();
+ 
+                foreach ($orderItems as $item) {
+                    $this->setLog($item);
+                    $item->getItemId();
+                    $item->getOrderId();
+                    $item->getStoreId();
+                    $item->getProductId();
+                
+                    $this->setLog($item->getProductOptions());
+                
+                    $item->getSku();
+                    $item->getName();
+                    $item->getQtyOrdered();
+                    $item->getPrice();
+                    $this->setLog($item);
+                }
                 $this-> setLog($orderTest);
             } catch (\Exception $th) {
                 $this-> setLog($th);

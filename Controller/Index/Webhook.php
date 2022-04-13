@@ -66,7 +66,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog($orderId_test);
             
             $order = $this->order->load($orderId_test);
-            $order ->setStatus("Status Code 0684769794");
+            $order ->setStatus("complete");
             $order ->save();
             
             /*$objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();

@@ -23,6 +23,9 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $payment;
     protected $logger;
     protected $invoiceService;
+
+    protected $resultPageFactory;
+    protected $orderRepository;
     
     public function __construct(
             Context $context,             
@@ -30,13 +33,17 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             //OpenpayPayment $payment, 
             PayCashPayment $payment,
             \Psr\Log\LoggerInterface $logger_interface,
-            \Magento\Sales\Model\Service\InvoiceService $invoiceService
+            \Magento\Sales\Model\Service\InvoiceService $invoiceService,
+            \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+            \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
     ) {
         parent::__construct($context);        
         $this->request = $request;
         $this->payment = $payment;
         $this->logger = $logger_interface;     
         $this->invoiceService = $invoiceService;
+        $this->resultPageFactory = $resultPageFactory;
+        $this->orderRepository = $orderRepository;
     }
 
 
@@ -60,15 +67,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $orderId_test = '000000182';
             $this-> setLog($orderId_test);
             
-            $objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
-            $this-> setLog($objectManager_Test);
             
-            try {                
-                $orderTest = $objectManager_Test->create('\Magento\Sales\Model\OrderRepository')->get(182);
-                $this-> setLog($orderTest);
-            } catch (\Exception $th) {
-                $this-> setLog($th);
-            }
             
             $this-> setLog("esto es el order test");
             $this-> setLog($orderTest);
@@ -79,6 +78,27 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $payment_method = $json->payment_method;
             
             $this-> setLog("validando...");
+
+            $resultPage = $this->resultPageFactory->create();
+            $orderId = 182;
+            $order = $this->orderRepository->get($orderId);
+            echo "Order Increment ID : " . $order->getIncrementId() . "<br/>";
+            echo "Order Grand Total : " . $order->getGrandTotal() . "<br/>";
+            echo "Order Sub Total : " . $order->getSubtotal() . "<br/>";
+            echo "Customer ID : " . $order->getCustomerId() . "<br/>";
+            echo "Customer Email : " . $order->getCustomerEmail() . "<br/>";
+            echo "First Name : " . $order->getCustomerFirstname() . "<br/>";
+            echo "Last Name : " . $order->getCustomerLastname() . "<br/>";
+            //Billing Information
+            echo "<pre/>";
+            print_r($order->getBillingAddress()->getData());
+            //Shipping Information
+            print_r($order->getShippingAddress()->getData());
+            //Payment Information
+            print_r($order->getPayment()->getData());
+
+
+            /************TESTING*************************** */
 
             $paycash = $this->payment->getOpenpayInstance();
             $this-> setLog('Despues de getOpenPayInstance');

@@ -65,9 +65,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog("impresion de request data completa...");
 
             $orderId_test = '000000182';
-            $this-> setLog($orderId_test);
-            
-            
+            $this-> setLog($orderId_test);            
             
             $this-> setLog("esto es el order test");
             $this-> setLog($orderTest);
@@ -81,21 +79,28 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $resultPage = $this->resultPageFactory->create();
             $orderId = 182;
-            $order = $this->orderRepository->get($orderId);
-            echo "Order Increment ID : " . $order->getIncrementId() . "<br/>";
-            echo "Order Grand Total : " . $order->getGrandTotal() . "<br/>";
-            echo "Order Sub Total : " . $order->getSubtotal() . "<br/>";
-            echo "Customer ID : " . $order->getCustomerId() . "<br/>";
-            echo "Customer Email : " . $order->getCustomerEmail() . "<br/>";
-            echo "First Name : " . $order->getCustomerFirstname() . "<br/>";
-            echo "Last Name : " . $order->getCustomerLastname() . "<br/>";
+            $orderTest = $this->orderRepository->get($orderId);
+            $this->setLog("Order Increment ID : " . $orderTest->getIncrementId());
+            $this->setLog("Order Grand Total : " . $orderTest->getGrandTotal());
+            $this->setLog("Order Sub Total : " . $orderTest->getSubtotal());
+            $this->setLog("Customer ID : " . $orderTest->getCustomerId());
+            $this->setLog("Customer Email : " . $orderTest->getCustomerEmail());
+            $this->setLog("First Name : " . $orderTest->getCustomerFirstname());
+            $this->setLog("Last Name : " . $orderTest->getCustomerLastname());
+
+            echo "Order Increment ID : " . $orderTest->getIncrementId() . "<br/>";
+            echo "Order Grand Total : " . $orderTest->getGrandTotal() . "<br/>";
+            echo "Order Sub Total : " . $orderTest->getSubtotal() . "<br/>";
+            echo "Customer ID : " . $orderTest->getCustomerId() . "<br/>";
+            echo "Customer Email : " . $orderTest->getCustomerEmail() . "<br/>";
+            echo "First Name : " . $orderTest->getCustomerFirstname() . "<br/>";
+            echo "Last Name : " . $orderTest->getCustomerLastname() . "<br/>";
             //Billing Information
-            echo "<pre/>";
-            print_r($order->getBillingAddress()->getData());
+            print_r($orderTest->getBillingAddress()->getData());
             //Shipping Information
-            print_r($order->getShippingAddress()->getData());
+            print_r($orderTest->getShippingAddress()->getData());
             //Payment Information
-            print_r($order->getPayment()->getData());
+            print_r($orderTest->getPayment()->getData());
 
 
             /************TESTING*************************** */

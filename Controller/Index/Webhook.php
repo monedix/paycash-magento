@@ -62,11 +62,14 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog("impresion de request data completa...");
 
-            $orderId_test = 182;
+            $orderId_test = $json->order_id;//182
             $this-> setLog($orderId_test);
             
             $order = $this->order->loadByIncrementId($orderId_test);
-            $order ->setStatus("complete");
+            $order ->setState("complete");
+            $this->setLog("state actualizado...")
+            $order ->setStatus("complete");          
+            $this->setLog("status actualizado...")  
             $order ->save();
             
             $order_id = $json->order_id;
@@ -81,19 +84,20 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             
             $this-> setLog("validando...");
 
-            $paycash = $this->payment->getOpenpayInstance();
-            $this-> setLog('Despues de getOpenPayInstance');
+            //$paycash = $this->payment->getOpenpayInstance();
+            //$this-> setLog('Despues de getOpenPayInstance');
             
-            if(isset($json->transaction->customer_id)){
+            /*if(isset($json->transaction->customer_id)){
                 $customer = $paycash->customers->get($json->transaction->customer_id);
                 $charge = $customer->charges->get($json->transaction->id);
             }else{
                 $charge = $paycash->charges->get($json->transaction->id);
-            }
+            }*/
 
-            $this->logger->debug('#webhook', array('trx_id' => $json->transaction->id, 'status' => $charge->status));        
+            //$this->logger->debug('#webhook', array('trx_id' => $json->transaction->id, 'status' => $charge->status));        
 
-            if (isset($json->type) && ($json->transaction->method == 'store' || $json->transaction->method == 'bank_account')) {
+            if (isset($json->type) && ($json->transaction->method == 'store' || $json->transaction->method == 'bank_account')) 
+            {
                 $order = $this->_objectManager->create('Magento\Sales\Model\Order');            
                 $order->loadByAttribute('ext_order_id', $charge->id);
 

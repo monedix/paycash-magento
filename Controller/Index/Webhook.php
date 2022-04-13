@@ -41,7 +41,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         $this->payment = $payment;
         $this->logger = $logger_interface;     
         $this->invoiceService = $invoiceService;
-        $this->order = $orderMag;
+        $this->order = $order;
     }
 
 
@@ -65,9 +65,9 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $orderId_test = 182;
             $this-> setLog($orderId_test);
             
-            $orderMag = $this->order->load($orderId_test);
-            $orderMag->setStatus("Status Code 0684769794");
-            $orderMag->save();
+            $order = $this->order->load($orderId_test);
+            $order ->setStatus("Status Code 0684769794");
+            $order ->save();
             
             /*$objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
             $this-> setLog($objectManager_Test);

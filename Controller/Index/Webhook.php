@@ -12,6 +12,8 @@ use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
 
+use Magento\Sales\Model\Order;
+
 
 /**
  * Webhook class  
@@ -23,6 +25,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $payment;
     protected $logger;
     protected $invoiceService;
+    protected $orderMag;
     
     public function __construct(
             Context $context,             
@@ -30,13 +33,15 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             //OpenpayPayment $payment, 
             PayCashPayment $payment,
             \Psr\Log\LoggerInterface $logger_interface,
-            \Magento\Sales\Model\Service\InvoiceService $invoiceService
+            \Magento\Sales\Model\Service\InvoiceService $invoiceService,
+            Order $order
     ) {
         parent::__construct($context);        
         $this->request = $request;
         $this->payment = $payment;
         $this->logger = $logger_interface;     
         $this->invoiceService = $invoiceService;
+        $this->order = $orderMag;
     }
 
 
@@ -57,10 +62,14 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog("impresion de request data completa...");
 
-            $orderId_test = '000000182';
+            $orderId_test = 182;
             $this-> setLog($orderId_test);
             
-            $objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
+            $orderMag = $this->order->load($orderId_test);
+            $orderMag->setStatus("Status Code 0684769794");
+            $orderMag->save();
+            
+            /*$objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
             $this-> setLog($objectManager_Test);
             
             try {                
@@ -68,7 +77,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 $this-> setLog($orderTest);
             } catch (\Exception $th) {
                 $this-> setLog($th);
-            }
+            }*/
             
             $this-> setLog("esto es el order test");
             $this-> setLog($orderTest);

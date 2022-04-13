@@ -69,23 +69,15 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $order ->setStatus("complete");
             $order ->save();
             
-            /*$objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
-            $this-> setLog($objectManager_Test);
-            
-            try {                
-                $orderTest = $objectManager_Test->create('\Magento\Sales\Model\OrderRepository')->get(182);
-                $this-> setLog($orderTest);
-            } catch (\Exception $th) {
-                $this-> setLog($th);
-            }*/
-            
-            $this-> setLog("esto es el order test");
-            $this-> setLog($orderTest);
-
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;
             $charge = $json->charge;
             $payment_method = $json->payment_method;
+
+            $this->setLog($order_id);
+            $this->setLog($paid_at);
+            $this->setLog($charge);
+            $this->setLog($payment_method);
             
             $this-> setLog("validando...");
 

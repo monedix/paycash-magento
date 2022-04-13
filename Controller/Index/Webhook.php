@@ -23,9 +23,6 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $payment;
     protected $logger;
     protected $invoiceService;
-
-    protected $resultPageFactory;
-    protected $orderRepository;
     
     public function __construct(
             Context $context,             
@@ -33,17 +30,13 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             //OpenpayPayment $payment, 
             PayCashPayment $payment,
             \Psr\Log\LoggerInterface $logger_interface,
-            \Magento\Sales\Model\Service\InvoiceService $invoiceService,
-            \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-            \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+            \Magento\Sales\Model\Service\InvoiceService $invoiceService
     ) {
         parent::__construct($context);        
         $this->request = $request;
         $this->payment = $payment;
         $this->logger = $logger_interface;     
         $this->invoiceService = $invoiceService;
-        $this->resultPageFactory = $resultPageFactory;
-        $this->orderRepository = $orderRepository;
     }
 
 
@@ -65,9 +58,20 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog("impresion de request data completa...");
 
             $orderId_test = '000000182';
-            $this-> setLog($orderId_test);            
+            $this-> setLog($orderId_test);
+            
+            $objectManager_Test = \Magento\Framework\App\ObjectManager::getInstance();
+            $this-> setLog($objectManager_Test);
+            
+            try {                
+                $orderTest = $objectManager_Test->create('\Magento\Sales\Model\OrderRepository')->get(182);
+                $this-> setLog($orderTest);
+            } catch (\Exception $th) {
+                $this-> setLog($th);
+            }
             
             $this-> setLog("esto es el order test");
+            $this-> setLog($orderTest);
 
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;
@@ -75,34 +79,6 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $payment_method = $json->payment_method;
             
             $this-> setLog("validando...");
-
-            $resultPage = $this->resultPageFactory->create();
-            $orderId = 182;
-            $orderTest = $this->orderRepository->get($orderId);
-            $this->setLog("Order Increment ID : " . $orderTest->getIncrementId());
-            $this->setLog("Order Grand Total : " . $orderTest->getGrandTotal());
-            $this->setLog("Order Sub Total : " . $orderTest->getSubtotal());
-            $this->setLog("Customer ID : " . $orderTest->getCustomerId());
-            $this->setLog("Customer Email : " . $orderTest->getCustomerEmail());
-            $this->setLog("First Name : " . $orderTest->getCustomerFirstname());
-            $this->setLog("Last Name : " . $orderTest->getCustomerLastname());
-
-            echo "Order Increment ID : " . $orderTest->getIncrementId() . "<br/>";
-            echo "Order Grand Total : " . $orderTest->getGrandTotal() . "<br/>";
-            echo "Order Sub Total : " . $orderTest->getSubtotal() . "<br/>";
-            echo "Customer ID : " . $orderTest->getCustomerId() . "<br/>";
-            echo "Customer Email : " . $orderTest->getCustomerEmail() . "<br/>";
-            echo "First Name : " . $orderTest->getCustomerFirstname() . "<br/>";
-            echo "Last Name : " . $orderTest->getCustomerLastname() . "<br/>";
-            //Billing Information
-            print_r($orderTest->getBillingAddress()->getData());
-            //Shipping Information
-            print_r($orderTest->getShippingAddress()->getData());
-            //Payment Information
-            print_r($orderTest->getPayment()->getData());
-
-
-            /************TESTING*************************** */
 
             $paycash = $this->payment->getOpenpayInstance();
             $this-> setLog('Despues de getOpenPayInstance');

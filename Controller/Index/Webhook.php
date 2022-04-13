@@ -126,7 +126,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             }                    
         } catch (\Exception $e) {
             $this->logger->error('#webhook', array('msg' => $e->getMessage()));  
-            $this->setLog('#webhook', $e);                  
+            $this->setLog($e);
+            $this->setLog('#webhook', array('msg' => $e->getMessage())); 
         }
         
         header('HTTP/1.1 200 OK');

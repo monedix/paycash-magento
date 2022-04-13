@@ -68,7 +68,6 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this-> setLog($orderId_test);            
             
             $this-> setLog("esto es el order test");
-            $this-> setLog($orderTest);
 
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;

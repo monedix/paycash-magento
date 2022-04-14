@@ -25,7 +25,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $payment;
     protected $logger;
     protected $invoiceService;
-    protected $orderMag;
+    protected $_transportBuilder;
+    protected $_storeManager;
     
     public function __construct(
             Context $context,             
@@ -34,7 +35,9 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             PayCashPayment $payment,
             \Psr\Log\LoggerInterface $logger_interface,
             \Magento\Sales\Model\Service\InvoiceService $invoiceService,
-            Order $order
+            Order $order,
+            \Paycash\Pay\Mail\Template\TransportBuilder $transportBuilder,
+            \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         parent::__construct($context);        
         $this->request = $request;
@@ -42,6 +45,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         $this->logger = $logger_interface;     
         $this->invoiceService = $invoiceService;
         $this->order = $order;
+        $this->_transportBuilder = $transportBuilder;
+        $this->_storeManager = $storeManager;
     }
 
 
@@ -62,14 +67,14 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog("impresion de request data completa...");
 
-            $orderAmount = $json->charge;
+            $orderAmount = $json->charge;//arrreglar para que acepte string con coma
             $orderId_test = (int)$json->order_id;//181
             $this-> setLog($orderId_test);
             
             $order = $this->order->loadByIncrementId($orderId_test);
             $orderState = \Magento\Sales\Model\Order::STATE_COMPLETE;
             $order->setState($orderState)->setStatus($orderState);
-            $order->setTotalPaid($orderAmount); 
+            //$order->setTotalPaid($orderAmount); 
             $order->addStatusHistoryComment("Pago recibido exitosamente")->setIsCustomerNotified(true);
             $order ->save();
 
@@ -88,8 +93,20 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this->setLog($paid_at);
             $this->setLog($charge);
             $this->setLog($payment_method);
-            
-            $this-> setLog("validando...");
+
+            $dataforemail = [
+                '_paychash_pay_day_limit' => 'Este es el tiempo de expiracion',
+                '_paychash_pay_autorization_token' => 'Este es el numero numero de referencia',
+                'instruccionesTres' => 'Instrucciones de prueba 3',
+                '_paycash_pay_instrucciones' => 'Hemos recibido el pago correspondiente, proceso completado',
+                '_paycash_pay_logo' => 'Logo de paycash',
+                '_paycash_pay_urlLogoBarCode' => 'Esto es el codigo de barras'
+            ];
+
+            $this-> setLog('Enviando email...');
+            $this->sendEmail($order, $dataforemail);
+            $this-> setLog("Email enviado ...");
+            $this-> setLog("Proceso de pago completado a traves de webhook...");
 
             //$paycash = $this->payment->getOpenpayInstance();
             //$this-> setLog('Despues de getOpenPayInstance');
@@ -103,6 +120,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             //$this->logger->debug('#webhook', array('trx_id' => $json->transaction->id, 'status' => $charge->status));        
 
+            /*
             if (isset($json->type) && ($json->transaction->method == 'store' || $json->transaction->method == 'bank_account')) 
             {
                 $order = $this->_objectManager->create('Magento\Sales\Model\Order');            
@@ -126,7 +144,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                     $order->addStatusHistoryComment("Pago vencido")->setIsCustomerNotified(true);            
                     $order->save();
                 }
-            }                    
+            }  
+            */                  
         } catch (\Exception $e) {
             $this->logger->error('#webhook', array('msg' => $e->getMessage()));  
             $this->setLog($e);
@@ -164,6 +183,53 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     public function validateForCsrf(RequestInterface $request): ?bool
     {
         return true;
+    }
+
+    public function sendEmail($order, $dataforemail = array())
+    {    
+        try
+        {
+            $templateId = 'paycash_pdf_processcomplete_template';
+            $email = 'demo@demo.com'; //$this->scope_config->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
+            $name  = 'demo'; //$this->scope_config->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
+            $toEmail = $order->getCustomerEmail();  
+
+            $template_vars = array(
+                'title' => 'Tu referencia de pago | Orden #'.$order->getIncrementId(),
+                'adicional' => $dataforemail,
+            );
+
+            $storeId = $this->_storeManager->getStore()->getId();
+            $from = array('email' => $email, 'name' => $name);
+            
+            $templateOptions = [
+                'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                'store' => $storeId
+            ];
+
+            $this-> setLog('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
+            //$this->logger->debug('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
+
+            $transportBuilderObj = $this->_transportBuilder->setTemplateIdentifier($templateId)
+            ->setTemplateOptions($templateOptions)
+            ->setTemplateVars($template_vars)
+            ->setFrom($from)
+            ->addTo($toEmail)
+            //->addAttachment($pdf, 'recibo_pago.pdf', 'application/octet-stream')
+            ->getTransport();
+            $transportBuilderObj->sendMessage(); 
+            return;
+        } 
+        catch (\Magento\Framework\Exception\MailException $me)
+        {            
+            $this-> setLog('#MailException', array('msg' => $me->getMessage()));
+            //$this->logger->error('#MailException', array('msg' => $me->getMessage()));
+        }
+        catch (\Exception $e)
+        {            
+            $this-> setLog('#Exception', array('msg' => $e->getMessage()));
+            //$this->logger->error('#Exception', array('msg' => $e->getMessage()));
+        }
     }
 
     public function setLog($log)

@@ -95,12 +95,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this->setLog($payment_method);
 
             $dataforemail = [
-                '_paychash_pay_day_limit' => 'Este es el tiempo de expiracion',
-                '_paychash_pay_autorization_token' => 'Este es el numero numero de referencia',
                 'instruccionesTres' => 'Instrucciones de prueba 3',
-                '_paycash_pay_instrucciones' => 'Hemos recibido el pago correspondiente, proceso completado',
-                '_paycash_pay_logo' => 'Logo de paycash',
-                '_paycash_pay_urlLogoBarCode' => 'Esto es el codigo de barras'
+                '_paycash_pay_instrucciones' => 'Hemos recibido el pago correspondiente, proceso completado'
             ];
 
             $this-> setLog('Enviando email...');
@@ -195,7 +191,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $toEmail = $order->getCustomerEmail();  
 
             $template_vars = array(
-                'title' => 'Tu referencia de pago | Orden #'.$order->getIncrementId(),
+                'title' => 'Proceso pago completado | Orden #'.$order->getIncrementId(),
                 'adicional' => $dataforemail,
             );
 

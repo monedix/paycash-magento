@@ -94,9 +94,14 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this->setLog($charge);
             $this->setLog($payment_method);
 
+            $nombre = $order->getCustomerFirstname();
+            $apellido = $order->getCustomerLastname();
+
             $dataforemail = [
                 'instruccionesTres' => 'Instrucciones de prueba 3',
-                '_paycash_pay_instrucciones' => 'Hemos recibido el pago correspondiente, proceso completado'
+                '_paycash_pay_instrucciones' => 'Hemos recibido el pago correspondiente, proceso completado',
+                'nombre_usuario' => $nombre,
+                'apellido_usuario' => $apellido
             ];
 
             $this-> setLog('Enviando email...');

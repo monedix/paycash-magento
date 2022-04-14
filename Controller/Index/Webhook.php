@@ -26,6 +26,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $logger;
     protected $invoiceService;
     protected $orderMag;
+    protected $_transportBuilder;
+    protected $_storeManager;
     
     public function __construct(
             Context $context,             

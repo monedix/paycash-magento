@@ -222,11 +222,13 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         } 
         catch (\Magento\Framework\Exception\MailException $me)
         {            
-            $this->logger->error('#MailException', array('msg' => $me->getMessage()));
+            //$this->logger->error('#MailException', array('msg' => $me->getMessage()));
+            $this->setLog('#MailException', array('msg' => $me->getMessage()));
         }
         catch (\Exception $e)
         {            
-            $this->logger->error('#Exception', array('msg' => $e->getMessage()));
+            //$this->logger->error('#Exception', array('msg' => $e->getMessage()));
+            $this->setLog('#Exception', array('msg' => $e->getMessage()));
         }
     }  
 

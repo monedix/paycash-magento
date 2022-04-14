@@ -72,7 +72,9 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this->setLog("status & state Orden actualizado...");
             $info = $order->getPayment()->getAdditionalInformation();
+            $coreo = $order->getCustomerEmail();
             $this->setLog($info);
+            $this->setLog($coreo);
             
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;

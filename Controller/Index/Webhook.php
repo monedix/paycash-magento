@@ -97,7 +97,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 '_paychash_pay_day_limit' => 'tres dias',
                 '_paychash_pay_autorization_token' => 'la referencia',
                 'instruccionesTres' => 'las instrucciones 3',
-                '_paycash_pay_instrucciones' => 'las instrucciones',
+                '_paycash_pay_instrucciones' => 'Proceso completo, Gracias hemos recibido su pago',
                 '_paycash_pay_logo' => 'el logo',
                 '_paycash_pay_urlLogoBarCode' => 'logo codigo de barras'
             ];

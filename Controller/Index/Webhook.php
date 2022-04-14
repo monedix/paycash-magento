@@ -68,7 +68,10 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog("impresion de request data completa...");
 
-            $orderAmount = (float) str_replace(['.', ','], ['', '.'], $json->charge);
+            $cargo = $json->charge;
+            $rplcCargo = str_replace(['.', ','], ['', '.'], $cargo);
+
+            $orderAmount = (float)$rplcCargo;
             $orderId_test = (int)$json->order_id;//181
             $this-> setLog($orderId_test);
             

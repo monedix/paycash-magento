@@ -62,12 +62,15 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog("impresion de request data completa...");
 
+            $orderAmount = $json->charge;
             $orderId_test = (int)$json->order_id;//181
             $this-> setLog($orderId_test);
             
             $order = $this->order->loadByIncrementId($orderId_test);
             $orderState = \Magento\Sales\Model\Order::STATE_COMPLETE;
             $order->setState($orderState)->setStatus($orderState);
+            $order->setTotalPaid($orderAmount);
+            $order->addStatusHistoryComment("Pago recibido exitosamente")->setIsCustomerNotified(true);
             $order ->save();
 
             $this->setLog("status & state Orden actualizado...");

@@ -377,9 +377,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         //$this->setLog(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png');
                         $urlLogoBarCode = '';
                         try{
-                            $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$ordenID.'.png', $Reference, '90');
-                            $this->setLog($codeBarr2);
                             $oID = (int)$ordenID;
+                            $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$oID.'.png', $Reference, '90');
+                            $this->setLog($codeBarr2);
+                            
                             $urlLogoBarCode = $this->_urlInterface->getBaseUrl() . '/app/code/Paycash/Pay/TempImgBarCode/'.$oID.'.png';
                             $this->setLog($urlLogoBarCode);
                         }

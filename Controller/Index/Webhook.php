@@ -106,6 +106,22 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog('Enviando email...');
             $this->sendEmail($order, $dataforemail);
+
+            try{
+                $file_pointer = BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$orderId_test.'.png';  
+                // Use unlink() function to delete a file
+                if (!unlink($file_pointer)) {
+                    $this->setLog($file_pointer.' cannot be deleted due to an error');
+                }
+                else {
+                    $this->setLog($file_pointer. ' has been deleted');
+                }
+            }
+            catch(\Exception $e)
+            {
+                $this->setLog($e);
+            }           
+
             $this-> setLog("Email enviado ...");
             $this-> setLog("Proceso de pago completado a traves de webhook...");
 

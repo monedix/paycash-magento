@@ -6,7 +6,6 @@ namespace Paycash\Pay\Controller\Index;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Paycash\Pay\Model\Payment as PayCashPayment;
-//use Paycash\Pay\Model\Payment as OpenpayPayment;
 
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -30,8 +29,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     
     public function __construct(
             Context $context,             
-            \Magento\Framework\App\Request\Http $request, 
-            //OpenpayPayment $payment, 
+            \Magento\Framework\App\Request\Http $request,
             PayCashPayment $payment,
             \Psr\Log\LoggerInterface $logger_interface,
             \Magento\Sales\Model\Service\InvoiceService $invoiceService,
@@ -124,9 +122,6 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
             $this-> setLog("Email enviado ...");
             $this-> setLog("Proceso de pago completado a traves de webhook...");
-
-            //$paycash = $this->payment->getOpenpayInstance();
-            //$this-> setLog('Despues de getOpenPayInstance');
             
             /*if(isset($json->transaction->customer_id)){
                 $customer = $paycash->customers->get($json->transaction->customer_id);

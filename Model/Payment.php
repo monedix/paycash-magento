@@ -95,7 +95,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->_transportBuilder = $transportBuilder;
 
         //$this->_countryFactory = $countryFactory; //REVISAR
-        //$url_base = $this->getUrlBaseOpenpay(); //REVISAR
         //$this->pdf_url_base = $url_base . "/paynet-pdf"; //REVISAR
     }
     /**

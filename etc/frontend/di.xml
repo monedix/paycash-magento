@@ -12,7 +12,7 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="paycash_stores_config_provider" xsi:type="object">Paycash\Pay\Model\PaycashConfigProvider</item>
+                <item name="openpay_stores_config_provider" xsi:type="object">Paycash\Pay\Model\OpenpayConfigProvider</item>
             </argument>
         </arguments>
     </type>        

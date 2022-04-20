@@ -2,15 +2,15 @@
 
 namespace Paycash\Pay\Model;
 
-class OpenpayCustomer extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface {
+class PaycashCustomer extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface {
 
-    const CACHE_TAG = 'openpay_customers';
+    const CACHE_TAG = 'paycash_customers';
 
-    protected $_cacheTag = 'openpay_customers';
-    protected $_eventPrefix = 'openpay_customers';
+    protected $_cacheTag = 'paycash_customers';
+    protected $_eventPrefix = 'paycash_customers';
         
     protected function _construct() {
-        $this->_init('Paycash\Pay\Model\ResourceModel\OpenpayCustomer');        
+        $this->_init('Paycash\Pay\Model\ResourceModel\PaycashCustomer');        
     }
 
     public function getIdentities() {
@@ -27,7 +27,7 @@ class OpenpayCustomer extends \Magento\Framework\Model\AbstractModel implements 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
         $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();                
-        $tableName = $connection->getTableName('openpay_customers'); //gives table name with prefix        
+        $tableName = $connection->getTableName('paycash_customers'); //gives table name with prefix        
         
         $sql = 'Select * FROM '.$tableName.' WHERE '.$field.' = "'.$value.'" limit 1';        
         $result = $connection->fetchAll($sql);
@@ -43,17 +43,17 @@ class OpenpayCustomer extends \Magento\Framework\Model\AbstractModel implements 
     /**
      * {@inheritDoc}
      */
-    public function setOpenpayId($openpayId)
+    public function setPaycashId($paycashId)
     {
-        return $this->setData('openpay_id', $openpayId);
+        return $this->setData('paycash_id', $paycashId);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getOpenpayId()
+    public function getpaycashId()
     {
-        return $this->getData('openpay_id');
+        return $this->getData('paycash_id');
     }
 
     /**

@@ -7,10 +7,10 @@ namespace Paycash\Pay\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Payment\Helper\Data as PaymentHelper;
-use Paycash\Pay\Model\Payment as OpenpayPayment;
+use Paycash\Pay\Model\Payment as PaycashPayment;
 use Magento\Checkout\Model\Cart;
 
-class OpenpayConfigProvider implements ConfigProviderInterface
+class PaycashConfigProvider implements ConfigProviderInterface
 {
     /**
      * @var string[]
@@ -33,9 +33,9 @@ class OpenpayConfigProvider implements ConfigProviderInterface
 
     /**     
      * @param PaymentHelper $paymentHelper
-     * @param OpenpayPayment $payment
+     * @param PaycashPayment $payment
      */
-    public function __construct(PaymentHelper $paymentHelper, OpenpayPayment $payment, Cart $cart) {        
+    public function __construct(PaymentHelper $paymentHelper, PaycashPayment $payment, Cart $cart) {        
         foreach ($this->methodCodes as $code) {
             $this->methods[$code] = $paymentHelper->getMethodInstance($code);
         }

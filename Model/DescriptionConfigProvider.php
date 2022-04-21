@@ -17,7 +17,7 @@ class DescriptionConfigProvider implements ConfigProviderInterface
      * @var string[]
      */
     protected $methodCodes = [
-        //Custompayment::CUSTOM_PAYMENT_CODE,
+        
         'paycash_pay',  
     ];
 

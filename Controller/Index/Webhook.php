@@ -55,19 +55,19 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $body = file_get_contents('php://input');        
             $json = json_decode($body); 
             
-            $this-> setLog("id cliente de la transaccion con body");
-            $this-> setLog($body);   
+            //$this-> setLog("id cliente de la transaccion con body");
+            //$this-> setLog($body);   
 
-            $this-> setLog($json->order_id);  
-            $this-> setLog($json->paid_at);  
-            $this-> setLog($json->charge);  
-            $this-> setLog($json->payment_method);  
+            //$this-> setLog($json->order_id);  
+            //$this-> setLog($json->paid_at);  
+            //$this-> setLog($json->charge);  
+            //$this-> setLog($json->payment_method);  
 
-            $this-> setLog("impresion de request data completa...");
+            //$this-> setLog("impresion de request data completa...");
 
             $orderAmount = $json->charge;//arrreglar para que acepte string con coma
             $orderId_test = (int)$json->order_id;//181
-            $this-> setLog($orderId_test);
+            //$this-> setLog($orderId_test);
             
             $order = $this->order->loadByIncrementId($orderId_test);
             $orderState = \Magento\Sales\Model\Order::STATE_COMPLETE;
@@ -76,21 +76,21 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $order->addStatusHistoryComment("Pago recibido exitosamente")->setIsCustomerNotified(true);
             $order ->save();
 
-            $this->setLog("status & state Orden actualizado...");
+            //$this->setLog("status & state Orden actualizado...");
             $info = $order->getPayment()->getAdditionalInformation();
             $coreo = $order->getCustomerEmail();
-            $this->setLog($info);
-            $this->setLog($coreo);
+            //$this->setLog($info);
+            //$this->setLog($coreo);
             
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;
             $charge = $json->charge;
             $payment_method = $json->payment_method;
 
-            $this->setLog($order_id);
-            $this->setLog($paid_at);
-            $this->setLog($charge);
-            $this->setLog($payment_method);
+            //$this->setLog($order_id);
+            //$this->setLog($paid_at);
+            //$this->setLog($charge);
+            //$this->setLog($payment_method);
 
             $nombre = $order->getCustomerFirstname();
             $apellido = $order->getCustomerLastname();
@@ -102,7 +102,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 'apellido_usuario' => $apellido
             ];
 
-            $this-> setLog('Enviando email...');
+            //$this-> setLog('Enviando email...');
             $this->sendEmail($order, $dataforemail);
 
             try{
@@ -120,44 +120,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 $this->setLog($e);
             }           
 
-            $this-> setLog("Email enviado ...");
-            $this-> setLog("Proceso de pago completado a traves de webhook...");
-            
-            /*if(isset($json->transaction->customer_id)){
-                $customer = $paycash->customers->get($json->transaction->customer_id);
-                $charge = $customer->charges->get($json->transaction->id);
-            }else{
-                $charge = $paycash->charges->get($json->transaction->id);
-            }*/
-
-            //$this->logger->debug('#webhook', array('trx_id' => $json->transaction->id, 'status' => $charge->status));        
-
-            /*
-            if (isset($json->type) && ($json->transaction->method == 'store' || $json->transaction->method == 'bank_account')) 
-            {
-                $order = $this->_objectManager->create('Magento\Sales\Model\Order');            
-                $order->loadByAttribute('ext_order_id', $charge->id);
-
-                if($json->type == 'charge.succeeded' && $charge->status == 'completed' ){
-                    $status = \Magento\Sales\Model\Order::STATE_PROCESSING;
-                    $order->setState($status)->setStatus($status);
-                    $order->setTotalPaid($charge->amount);  
-                    $order->addStatusHistoryComment("Pago recibido exitosamente")->setIsCustomerNotified(true);            
-                    $order->save();
-                    
-                    $invoice = $this->invoiceService->prepareInvoice($order);        
-                    $invoice->setTransactionId($charge->id);
-                    $invoice->setRequestedCaptureCase(\Magento\Sales\Model\Order\Invoice::CAPTURE_ONLINE);
-                    $invoice->register();
-                    $invoice->save();
-                }else if($json->type == 'transaction.expired' && $charge->status == 'cancelled'){
-                    $status = \Magento\Sales\Model\Order::STATE_CANCELED;
-                    $order->setState($status)->setStatus($status);
-                    $order->addStatusHistoryComment("Pago vencido")->setIsCustomerNotified(true);            
-                    $order->save();
-                }
-            }  
-            */                  
+            //$this-> setLog("Email enviado ...");
+            //$this-> setLog("Proceso de pago completado a traves de webhook...");                
         } catch (\Exception $e) {
             $this->logger->error('#webhook', array('msg' => $e->getMessage()));  
             $this->setLog($e);
@@ -219,7 +183,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 'store' => $storeId
             ];
 
-            $this-> setLog('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
+            //$this-> setLog('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
             //$this->logger->debug('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
 
             $transportBuilderObj = $this->_transportBuilder->setTemplateIdentifier($templateId)

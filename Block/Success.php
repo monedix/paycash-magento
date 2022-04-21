@@ -1,16 +1,9 @@
 <?php
 
 namespace Paycash\Pay\Block;
-//use Paycash\Pay\Model\Payment as OPayment;
 
 class Success extends \Magento\Framework\View\Element\Template
 {
-   //protected $instructions = '';
-   /*protected $payment;
-   public function __construct(OPayment $payment) {
-        $this->payment = $payment;
-    }*/
-
     private $order;
     private $checkoutSession;
 
@@ -32,9 +25,7 @@ class Success extends \Magento\Framework\View\Element\Template
 
    public function refDePago()
    {
-        //$this->instructions = $this->getConfigData('instructions');
-        //return $this->instructions;
-        return $this->getInformationOrder()['_paychash_pay_autorization_token']; //$this->getInformationOrder());//aqui va la referncia de pago para mostrar en succes.phtml
+        return $this->getInformationOrder()['_paychash_pay_autorization_token']; 
    }
 
    public function obtenerInstruct()

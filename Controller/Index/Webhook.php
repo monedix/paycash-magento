@@ -53,44 +53,24 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
           
         try {
             $body = file_get_contents('php://input');        
-            $json = json_decode($body); 
-            
-            //$this-> setLog("id cliente de la transaccion con body");
-            //$this-> setLog($body);   
+            $json = json_decode($body);
 
-            //$this-> setLog($json->order_id);  
-            //$this-> setLog($json->paid_at);  
-            //$this-> setLog($json->charge);  
-            //$this-> setLog($json->payment_method);  
-
-            //$this-> setLog("impresion de request data completa...");
-
-            $orderAmount = $json->charge;//arrreglar para que acepte string con coma
-            $orderId_test = (int)$json->order_id;//181
-            //$this-> setLog($orderId_test);
+            $orderAmount = $json->charge;
+            $orderId_test = (int)$json->order_id;
             
             $order = $this->order->loadByIncrementId($orderId_test);
             $orderState = \Magento\Sales\Model\Order::STATE_COMPLETE;
             $order->setState($orderState)->setStatus($orderState);
-            //$order->setTotalPaid($orderAmount); 
             $order->addStatusHistoryComment("Pago recibido exitosamente")->setIsCustomerNotified(true);
             $order ->save();
 
-            //$this->setLog("status & state Orden actualizado...");
             $info = $order->getPayment()->getAdditionalInformation();
             $coreo = $order->getCustomerEmail();
-            //$this->setLog($info);
-            //$this->setLog($coreo);
             
             $order_id = $json->order_id;
             $paid_at = $json->paid_at;
             $charge = $json->charge;
             $payment_method = $json->payment_method;
-
-            //$this->setLog($order_id);
-            //$this->setLog($paid_at);
-            //$this->setLog($charge);
-            //$this->setLog($payment_method);
 
             $nombre = $order->getCustomerFirstname();
             $apellido = $order->getCustomerLastname();
@@ -102,12 +82,11 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 'apellido_usuario' => $apellido
             ];
 
-            //$this-> setLog('Enviando email...');
             $this->sendEmail($order, $dataforemail);
 
             try{
                 $file_pointer = BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$orderId_test.'.png';  
-                // Use unlink() function to delete a file
+                
                 if (!unlink($file_pointer)) {
                     $this->setLog($file_pointer.' cannot be deleted due to an error');
                 }
@@ -119,9 +98,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             {
                 $this->setLog($e);
             }           
-
-            //$this-> setLog("Email enviado ...");
-            //$this-> setLog("Proceso de pago completado a traves de webhook...");                
+              
         } catch (\Exception $e) {
             $this->logger->error('#webhook', array('msg' => $e->getMessage()));  
             $this->setLog($e);
@@ -132,16 +109,6 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         exit;        
     }       
     
-    /**
-     * Create exception in case CSRF validation failed.
-     * Return null if default exception will suffice.
-     *
-     * @param RequestInterface $request
-     * @link https://magento.stackexchange.com/questions/253414/magento-2-3-upgrade-breaks-http-post-requests-to-custom-module-endpoint
-     *
-     * @return InvalidRequestException|null
-     * @SuppressWarnings(PMD.UnusedFormalParameter)
-     */
     public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
     {
         return null;
@@ -166,8 +133,8 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         try
         {
             $templateId = 'paycash_pdf_processcomplete_template';
-            $email = 'demo@demo.com'; //$this->scope_config->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
-            $name  = 'demo'; //$this->scope_config->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
+            $email = 'demo@demo.com'; 
+            $name  = 'demo'; 
             $toEmail = $order->getCustomerEmail();  
 
             $template_vars = array(
@@ -183,15 +150,11 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
                 'store' => $storeId
             ];
 
-            //$this-> setLog('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
-            //$this->logger->debug('#sendEmail', array('$from' => $from, '$toEmail' => $toEmail));
-
             $transportBuilderObj = $this->_transportBuilder->setTemplateIdentifier($templateId)
             ->setTemplateOptions($templateOptions)
             ->setTemplateVars($template_vars)
             ->setFrom($from)
             ->addTo($toEmail)
-            //->addAttachment($pdf, 'recibo_pago.pdf', 'application/octet-stream')
             ->getTransport();
             $transportBuilderObj->sendMessage(); 
             return;
@@ -199,12 +162,10 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         catch (\Magento\Framework\Exception\MailException $me)
         {            
             $this-> setLog('#MailException', array('msg' => $me->getMessage()));
-            //$this->logger->error('#MailException', array('msg' => $me->getMessage()));
         }
         catch (\Exception $e)
         {            
             $this-> setLog('#Exception', array('msg' => $e->getMessage()));
-            //$this->logger->error('#Exception', array('msg' => $e->getMessage()));
         }
     }
 

@@ -95,7 +95,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $this->_transportBuilder = $transportBuilder;
     }
    
-    
+
     public function authorizeNew(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
         if (!$this->canAuthorize()) {
@@ -179,7 +179,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         
         $order = $payment->getOrder();
 
-        $this->setLog('Init API request to Paycash process ...');
         $paycashps_test_key =  $this->getTestApikey();
 		$paycashps_production_key = $this->getProductionApikey();
 
@@ -192,7 +191,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $testmode = $this->isSandbox();
 
         $country = $this->getCountry();
-        $this->setLog($country);
 
         $vigenciaEnDias = $this->getValidity();
 
@@ -228,7 +226,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HEADER, 0); 
-                $this-> setLog('Exec peticion token para ref de pago...');
+                
                 $data = curl_exec($ch);
                 curl_close($ch);
                 $body = json_decode($data);
@@ -240,11 +238,10 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                 }
                 else
                 {
-                    $this-> setLog('Exec peticion token success');
+                    
                     $token = $body->Authorization;
                     $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
-                    $this-> setLog($ExpirationDate);
-
+                    
                     $parametroPais = '';
                     
                     if($testmode != '1')
@@ -282,7 +279,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                     
                     if($body->ErrorCode != 0)
                     {
-                        $this-> setLog('ALGUN ERROR AL PEDIR PETICION DE PAYCASH');
                         throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener referencia de pago.'));
                     }
                     else
@@ -294,10 +290,8 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         try{
                             $oID = (int)$ordenID;
                             $codeBarr2 = $this->barcode(BP . '/app/code/Paycash/Pay/TempImgBarCode/'.$oID.'.png', $Reference, '90');
-                            $this->setLog($codeBarr2);
                             
                             $urlLogoBarCode = $this->_urlInterface->getBaseUrl() . '/app/code/Paycash/Pay/TempImgBarCode/'.$oID.'.png';
-                            $this->setLog($urlLogoBarCode);
                         }
                         catch(\Exception $e){
                             $this->setLog("error creando barcode 2:".$e->getMessage());
@@ -340,9 +334,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                         
                         $payment->setTransactionId($response)->setPreparedMessage($message)->setIsTransactionClosed(0);
                         
-                        $this-> setLog('Enviando email...');
                         $this->sendEmail($order, $dataforemail);
-                        $this-> setLog('Email enviado...');
                     }
                 }
             }
@@ -432,7 +424,6 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
         $order = $payment->getOrder();
         $billing = $order->getBillingAddress();
-        echo 'SE EJECUTO LA FUNCION EXECUTE desde payment';
         try
         {
             $customer_name = $billing->getFirstname();

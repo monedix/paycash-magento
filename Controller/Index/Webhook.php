@@ -97,15 +97,34 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             catch(\Exception $e)
             {
                 $this->setLog($e);
+                $response = array();
+                $response[0] = array(
+                    'code' => '1',
+                    'message' => $e->getMessage()
+                );
+                echo json_encode($response);
             }           
               
         } catch (\Exception $e) {
             $this->logger->error('#webhook', array('msg' => $e->getMessage()));  
             $this->setLog($e);
             $this->setLog('#webhook', array('msg' => $e->getMessage())); 
+
+            $response = array();
+            $response[0] = array(
+                'code' => '1',
+                'message' => $e->getMessage()
+            );
+            echo json_encode($response);
         }
         
         header('HTTP/1.1 200 OK');
+        $data = array();
+        $response[0] = array(
+            'code' => '0'
+        );
+        echo json_encode($response);
+
         exit;        
     }       
     

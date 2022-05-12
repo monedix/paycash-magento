@@ -97,8 +97,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             catch(\Exception $e)
             {
                 $this->setLog($e);
-                $response = array();
-                $response[0] = array(
+                $response = array(
                     'code' => '1',
                     'message' => $e->getMessage()
                 );
@@ -110,8 +109,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             $this->setLog($e);
             $this->setLog('#webhook', array('msg' => $e->getMessage())); 
 
-            $response = array();
-            $response[0] = array(
+            $response = array(
                 'code' => '1',
                 'message' => $e->getMessage()
             );
@@ -119,8 +117,7 @@ class Webhook extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         }
         
         header('HTTP/1.1 200 OK');
-        $data = array();
-        $response[0] = array(
+        $response = array(
             'code' => '0'
         );
         echo json_encode($response);

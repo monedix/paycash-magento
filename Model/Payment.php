@@ -182,11 +182,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         $paycashps_test_key =  $this->getTestApikey();
 		$paycashps_production_key = $this->getProductionApikey();
 
-        $test_urlObtenerToken = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/authre';
-        $test_urlObtenerReferencia = 'https://1557zh6n42.execute-api.us-east-2.amazonaws.com/sb/v1/reference';
+        $test_urlObtenerToken ='https://api-pcdocs-emisor.paycashglobal.com/v1/authre';		
+        $test_urlObtenerReferencia = 'https://api-pcdocs-emisor.paycashglobal.com/v1/reference';
 
-		$produccion_urlObtenerToken = 'https://api-pcdocs-emisor.paycashglobal.com/v1/authre?country=';		
-		$produccion_urlObtenerReferencia = 'https://api-pcdocs-emisor.paycashglobal.com/v1/reference';
+		$produccion_urlObtenerToken = 'https://api-global-emisor.paycashglobal.com/v1/authre?country=MEX';		
+		$produccion_urlObtenerReferencia = 'https://api-global-emisor.paycashglobal.com/v1/reference';
+        
+        
     
         $testmode = $this->isSandbox();
 

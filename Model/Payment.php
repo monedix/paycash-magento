@@ -239,40 +239,62 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
                     throw new \Magento\Framework\Exception\LocalizedException(__('Error al obtener token.'));
                 }
                 else
-                {
-                    
-                    $token = $body->Authorization;
-                    $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
-                    
+                {   
                     $parametroPais = '';
-                    
                     if($testmode != '1')
                     {
                         $parametroPais = '"country" : "'.$country.'",';
                     }
-                    
+                    $token = $body->Authorization;
                     $ch = curl_init();
 
-                    curl_setopt_array($ch, array(
-                        CURLOPT_URL => $urlObtenerReferencia,
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS =>'{'.$parametroPais.'
-                            "Amount": "'.strval($totalOrden).'",
-                            "ExpirationDate": "'.strval($ExpirationDate).'",
-                            "Value": "'.strval($ordenID).'",
-                            "Type": "true"
-                        }',
-                        CURLOPT_HTTPHEADER => array(
-                        'authorization: '.$token,
-                        'Content-Type: application/json'
-                        ),
-                    ));
+                    if(!isset($vigenciaEnDias) || is_null($vigenciaEnDias) || $vigenciaEnDias == '' || $vigenciaEnDias == '0')
+                    {
+                        curl_setopt_array($ch, array(
+                            CURLOPT_URL => $urlObtenerReferencia,
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            CURLOPT_POSTFIELDS =>'{'.$parametroPais.'
+                                "Amount": "'.strval($totalOrden).'",
+                                "Value": "'.strval($ordenID).'",
+                                "Type": "true"
+                            }',
+                            CURLOPT_HTTPHEADER => array(
+                            'authorization: '.$token,
+                            'Content-Type: application/json'
+                            ),
+                        ));
+                    }
+                    else
+                    {
+                        $ExpirationDate = date('Y-m-d', strtotime(' + '.$vigenciaEnDias.' days'));
+                        curl_setopt_array($ch, array(
+                            CURLOPT_URL => $urlObtenerReferencia,
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            CURLOPT_POSTFIELDS =>'{'.$parametroPais.'
+                                "Amount": "'.strval($totalOrden).'",
+                                "ExpirationDate": "'.strval($ExpirationDate).'",
+                                "Value": "'.strval($ordenID).'",
+                                "Type": "true"
+                            }',
+                            CURLOPT_HTTPHEADER => array(
+                            'authorization: '.$token,
+                            'Content-Type: application/json'
+                            ),
+                        ));
+                    }
+                    
                     $this-> setLog('Exec peticion paycash ref de pago...');
                     $data = curl_exec($ch);
                     curl_close($ch);
